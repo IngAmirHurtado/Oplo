@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import './globals.css';
 
+import { ThemeProvider } from "@/components/theme-provider"
+
 const montserrat = localFont({
   src: [
     {
@@ -36,10 +38,16 @@ export default function RootLayout({
 }) {
   return (
   
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={montserrat.variable + " " + poppins.variable }>
+        <ThemeProvider
+            attribute="class"
+            enableSystem
+            disableTransitionOnChange
+          >
         
           {children}
+          </ThemeProvider>
         </body>
       </html>
 
