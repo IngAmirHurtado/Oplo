@@ -80,3 +80,13 @@ export const logout = async (req, res) => {
 
     return res.status(200).json({message: "Hasta pronto"});
 };
+
+
+export const checkAuth = async (req, res) => {
+    try {
+      res.status(200).json(req.user);
+    }
+    catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+};
