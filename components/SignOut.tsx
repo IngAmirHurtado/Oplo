@@ -14,8 +14,8 @@ const SignOut = () => {
         await signOut()
         router.push("/")
     }}>
-        <LogOut strokeWidth={1} className='w-5 h-5' />
-        <span className=  "text-sm">Sign out</span>
+        <LogOut strokeWidth={1} className='w-5 h-5 text-black' />
+        <span className=  "text-sm text-black">Sign out</span>
 
       </button>
   )
