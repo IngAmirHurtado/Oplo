@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { signup, login, logout, checkAuth } from "../controllers/auth.controller.js";
-import { protectRoute } from "../middlewares/valiteToken.js";
+import { protectRoute } from "../middlewares/validateToken.js";
 
 const router = Router();
 
-router.post('/sign-up', signup)
-router.post('/log-in', login)
-router.get('/logo-ut', logout)
+router.post('/signup', signup)
+router.post('/login', login)
+router.get('/logout', logout)
 
 router.get('/check', protectRoute, checkAuth )
 

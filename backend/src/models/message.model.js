@@ -7,16 +7,16 @@ const messageSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    recivedId:{
+    receivedId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
     text:{
-        type: string
+        type: String
     },
     image:{
-        string
+        type: String
     }
 },
 {

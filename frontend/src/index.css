@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... */
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer utilities {
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Blanco puro */
+    --foreground: 0 0% 10%; /* Negro intenso */
+    --card: 0 0% 100%; /* Blanco para tarjetas */
+    --card-foreground: 0 0% 10%; /* Negro para texto en tarjetas */
+    --popover: 0 0% 100%; /* Blanco para popovers */
+    --popover-foreground: 0 0% 10%; /* Negro en popovers */
+    --primary: 178 100% 48%; /* Color principal: 0AFFD6 */
+    --primary-foreground: 0 0% 100%; /* Blanco sobre 0AFFD6 */
+    --secondary: 0 0% 95%; /* Gris muy claro */
+    --secondary-foreground: 0 0% 10%; /* Negro */
+    --muted: 0 0% 90%; /* Gris suave */
+    --muted-foreground: 0 0% 70%; /* Gris más oscuro */
+    --accent: 178 100% 50%; /* Color de énfasis: 0AFFD6 */
+    --accent-foreground: 0 0% 100%; /* Blanco */
+    --destructive: 0 84.2% 60.2%; /* Rojo para acciones destructivas */
+    --destructive-foreground: 0 0% 100%; /* Blanco */
+    --border: 0 0% 80%; /* Gris claro */
+    --input: 0 0% 80%; /* Gris para inputs */
+    --ring: 178 100% 50%; /* Efecto de foco en 0AFFD6 */
+    --chart-1: 178 100% 50%; /* Primer color de gráficos */
+    --chart-2: 200 60% 45%; /* Azul suave */
+    --chart-3: 45 70% 50%; /* Amarillo cálido */
+    --radius: 0.5rem; /* Radio general */
+  }
+  
+  .dark {
+    --background: 0 0% 5%; /* Negro más profundo y neutro */
+    --foreground: 0 0% 100%; /* Blanco */
+    --card: 0 0% 10%; /* Negro para tarjetas */
+    --card-foreground: 0 0% 100%; /* Blanco */
+    --popover: 0 0% 10%; /* Negro */
+    --popover-foreground: 0 0% 100%; /* Blanco */
+    --primary: 178 100% 50%; /* Color principal */
+    --primary-foreground:  0 0% 5%; /* Negro sobre 0AFFD6 */
+    --secondary: 0 0% 15%; /* Gris oscuro */
+    --secondary-foreground: 0 0% 100%; /* Blanco */
+    --muted: 0 0% 20%; /* Gris apagado */
+    --muted-foreground: 0 0% 45%; /* Gris claro */
+    --accent: 178 100% 50%; /* Color de énfasis */
+    --accent-foreground:  0 0% 5%; /* Negro */
+    --destructive: 0 62.8% 30.6%; /* Rojo oscuro */
+    --destructive-foreground: 0 0% 100%; /* Blanco */
+    --border: 0 0% 15%; /* Gris oscuro */
+    --input: 0 0% 15%; /* Gris oscuro */
+    --ring: 178 100% 50%; /* Efecto de foco */
+    --chart-1: 178 100% 50%; /* Primer color de gráficos */
+    --chart-2: 200 50% 45%; /* Azul oscuro */
+    --chart-3: 340 65% 55%; /* Morado llamativo */
+  }
+  
+  
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

@@ -4,9 +4,9 @@ import User from "../models/user.model.js";
 import bcrypts from "bcryptjs";
 
 export const signup = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, username, password } = req.body;
 
-  if(!email || !name || !password) return res.status(400).json({ message: "Por favor, rellena todos los campos" });
+  if(!email || !username || !password) return res.status(400).json({ message: "Por favor, rellena todos los campos" });
 
   if (password.length < 6)
     return res
@@ -21,7 +21,7 @@ export const signup = async (req, res) => {
 
   const user = {
     email,
-    name,
+    username,
     password: hashPassword,
   };
 
@@ -39,7 +39,7 @@ export const signup = async (req, res) => {
   return res.status(200).json({ 
     id: newUser._id,
     email: newUser.email,
-    name: newUser.name,
+    username: newUser.username,
     profilePic: newUser.profilePic,
     created: newUser.createdAt,
     submited: newUser.updatedAt
@@ -68,7 +68,7 @@ export const login = async (req, res) => {
     return res.status(200).json({
         id: user._id,
         email: user.email,
-        name: user.name,
+        username: user.username,
         profilePic: user.profilePic,
         created: user.createdAt,
         submited: user.updatedAt
@@ -85,6 +85,7 @@ export const logout = async (req, res) => {
 export const checkAuth = async (req, res) => {
     try {
       res.status(200).json(req.user);
+      console.log(req.user);
     }
     catch (error) {
       res.status(400).json({ message: error.message });
