@@ -25,6 +25,7 @@ interface AuthStore {
 
   logInRequest: (data: LogDataForm) => Promise<void>;
   signUpRequest: (data: LogDataForm) => Promise<void>;
+  logOutRequest: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -68,6 +69,16 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ authError: e.response?.data?.message || "Error desconocido" });
     } finally {
       set({ isLoggingInOrSigningOut: false });
+    }
+  },
+
+  logOutRequest: async () => {
+    try{
+      await axiosInstance.get("/auth/logout");
+      set({ authUser: null });
+    }
+    catch{
+      set({ authUser: null });
     }
   },
 

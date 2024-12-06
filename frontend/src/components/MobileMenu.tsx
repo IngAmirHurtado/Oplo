@@ -13,7 +13,7 @@ const MobileMenu = () => {
     <div className="md:hidden">
       <Sheet >
         <SheetTrigger>
-          <Menu strokeWidth={1} className="w-5 h-5" />
+          <Menu strokeWidth={1} className="w-6 h-6" />
         </SheetTrigger>
         <SheetContent side="left" >
           <SheetHeader>

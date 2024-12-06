@@ -1,10 +1,8 @@
+import MyAccountDropdownMenu from "../MyAccountDropdownMenu";
 import { dataGeneralSideBar } from "./SideBarRotes.data";
-import { SiderItem } from "./SiderItem";
-
-import { useAuthStore } from "@/store/useAuthStore";
+import  SiderItem  from "./SiderItem";
 
 const SideBarRoutes = () => {
-  const { authUser } = useAuthStore();
 
   return (
     <div className="flex h-full flex-col justify-between p-3">
@@ -23,17 +21,7 @@ const SideBarRoutes = () => {
       </div>
 
      
-        <button className="bg-muted p-2 rounded-lg flex gap-2 max-sm:pb-10  border-none text-left">
-          <img src="/imgs/default-user.svg" className="h-9 w-9" />
-          <div className="flex flex-col justify-center overflow-hidden">
-            <p className="font-poppins text-[0.7rem] truncate w-full overflow-hidden whitespace-nowrap text-ellipsis">
-              {authUser?.email}
-            </p>
-            <p className="font-montserrat text-xs text-gray-500 truncate w-36 overflow-hidden whitespace-nowrap text-ellipsis">
-              {authUser?.username}
-            </p>
-          </div>
-        </button>
+        <MyAccountDropdownMenu site="sidebar"/>
     
     </div>
   );

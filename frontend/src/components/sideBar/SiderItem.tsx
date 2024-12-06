@@ -20,3 +20,5 @@ export const SiderItem = (props : SiderItemProps) => {
     </Link>
   )
 }
+
+export default SiderItem;

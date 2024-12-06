@@ -38,7 +38,7 @@ const LogForm = (props: LogFormProps) => {
 
   return (
     <form
-      className="mt-6 w-full md:max-w-full md:w-[30rem] max-h-full flex flex-col gap-5 overflow-hidden "
+      className="mt-6 w-full md:max-w-full md:w-[30rem] max-h-full flex flex-col gap-5 overflow-hidden  p-1 "
       onSubmit={handleSubmit(onSubmit)}
     >
       {type === "signup" && (
