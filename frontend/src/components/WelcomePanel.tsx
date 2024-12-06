@@ -11,7 +11,7 @@ const WelcomePanel = (props: WelcomePanelProps) => {
   const { stepCheckMobile, setStepCheckMobile } = useGeneralStore();
 
   return (
-    <div className="grid h-full grid-row-1 md:grid-row-2 mt-2 font-poppins p-1 ">
+    <div className="grid h-full grid-row-1 md:grid-row-2  mt-12 md:mt- font-poppins p-1 ">
 
       <div className="p-1 flex flex-col gap-5 items-center justify-center  mt-8 sm:mt-0">
         {isMobile && (

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import {axiosInstance} from "../api/axios.ts"
+import { axiosInstance } from "../api/axios.ts";
 
 interface User {
   id: string;
@@ -17,16 +17,14 @@ interface LogDataForm {
 interface AuthStore {
   authUser: User | null;
   ischeckingAuth: boolean;
-  checkAuth: () => Promise<void>; 
+  checkAuth: () => Promise<void>;
 
   isLoggingInOrSigningOut: boolean;
   authError: string | null;
   rebootAuthError: () => void;
-  
+
   logInRequest: (data: LogDataForm) => Promise<void>;
   signUpRequest: (data: LogDataForm) => Promise<void>;
-
- 
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -35,51 +33,45 @@ export const useAuthStore = create<AuthStore>((set) => ({
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
-      set({ authUser: res.data});
+      set({ authUser: res.data });
     } catch {
       set({ authUser: null });
-    } finally{
+    } finally {
       set({ ischeckingAuth: false });
     }
   },
-  
+
   isLoggingInOrSigningOut: false,
   authError: null,
 
   logInRequest: async (data) => {
-    try{
-      set({ isLoggingInOrSigningOut: true});
+    try {
+      set({ isLoggingInOrSigningOut: true });
       const res = await axiosInstance.post("/auth/login", data);
-      set({ authUser: res.data});
-    }catch (e) {
+      set({ authUser: res.data });
+    } catch (e) {
       // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
-     set({ authError: e.response?.data?.message  });
- } finally {
-      set({ isLoggingInOrSigningOut: false});
+      set({ authError: e.response?.data?.message });
+    } finally {
+      set({ isLoggingInOrSigningOut: false });
     }
   },
-  
 
-  signUpRequest : async (data) => {
-    try{
-      set({ isLoggingInOrSigningOut: true})
+  signUpRequest: async (data) => {
+    try {
+      set({ isLoggingInOrSigningOut: true });
       const res = await axiosInstance.post("/auth/signup", data);
       console.log(res.data);
-      set({ authUser: res.data});
-    }
-    catch (e: unknown) {
-       // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
-      set({ authError: e.response?.data?.message || 'Error desconocido' });
-  }
-    finally{
-      set({ isLoggingInOrSigningOut: false});
+      set({ authUser: res.data });
+    } catch (e: unknown) {
+      // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
+      set({ authError: e.response?.data?.message || "Error desconocido" });
+    } finally {
+      set({ isLoggingInOrSigningOut: false });
     }
   },
 
-  
   rebootAuthError: () => {
     set({ authError: null });
-  }
-
- 
+  },
 }));
