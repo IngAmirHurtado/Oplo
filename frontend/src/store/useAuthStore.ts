@@ -4,7 +4,7 @@ import { axiosInstance } from "../api/axios.ts";
 interface User {
   id: string;
   email: string;
-  name: string;
+  username: string;
   profilePic: string;
 }
 

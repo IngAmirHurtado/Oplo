@@ -35,7 +35,7 @@ const LogItem = (props: LogItemProps) => {
   return (
     <div className="flex flex-col items-center  justify-center gap-5 w-full md:w-[500px] overflow-scroll md:overflow-hidden  mt-12 md:mt-0">
       <div className="flex flex-col gap-3 items-center">
-        <CustomIcon icon={type === "login" ? LogInIcon : AtSign} />
+        <CustomIcon icon={type === "login" ? LogInIcon : AtSign} variant="outline"/>
         <h1 className="font-poppins text-2xl ">
           {type === "login" ? "Ingresa con tus datos" : "Crea tu cuenta"}
         </h1>

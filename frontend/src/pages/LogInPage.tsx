@@ -16,7 +16,7 @@ const LogInPage = () => {
   return (
     <div className="h-full  justify-between flex flex-col p-3 md:p-4  w-screen ">
       <div className="flex justify-between itemmscenter">
-        <img src="/imgs/logo.svg" alt="logo" className={`w-14 h-14`} />
+        <img src="/imgs/logo.svg" alt="logo" className={`w-8 h-8`} />
         <div className="">
           <ModeToggle />
         </div>

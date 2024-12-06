@@ -10,7 +10,7 @@ const SignUp = () => {
     <div className="h-full  justify-between flex flex-col p-3 md:p-4  w-screen ">
       {/* Encabezado */}
       <div className="flex justify-between itemn-center">
-        <img src="/imgs/logo.svg" alt="logo" className={`w-14 h-14`} />
+        <img src="/imgs/logo.svg" alt="logo" className={`w-8 h-8`} />
           <div className="">
             <ModeToggle />
           </div>

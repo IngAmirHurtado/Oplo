@@ -1,17 +1,22 @@
 import { LucideIcon } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface CustomIconProps{
   icon: LucideIcon;
+  variant: "nohover" | "default" | "destructive" | "outline" | "secondary";
 };
 
 const CustomIcon = (props: CustomIconProps) => {
-  const { icon: Icon } = props;
+  const { icon: Icon, variant } = props;
   return (
-    <div className="bg-slate-200 text-black  p-2 rounded-lg cursor-pointer max-w-max">
-      <Icon strokeWidth={1.5} className="w-5 h-5 " />
-    </div>
+
+      <Button variant={variant} size="icon"  >
+          <Icon className="absolute h-[1.2rem] w-[1.8rem] transition-all" />
+        </Button>
   );
 };
 
 export default CustomIcon;
  
+
+
