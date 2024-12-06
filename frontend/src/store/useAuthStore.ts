@@ -20,10 +20,13 @@ interface AuthStore {
   checkAuth: () => Promise<void>; 
 
   isLoggingInOrSigningOut: boolean;
+  authError: string | null;
+  rebootAuthError: () => void;
+  
   logInRequest: (data: LogDataForm) => Promise<void>;
   signUpRequest: (data: LogDataForm) => Promise<void>;
 
-  authError: string | null;
+ 
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -33,8 +36,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const res = await axiosInstance.get("/auth/check");
       set({ authUser: res.data});
-    } catch (e) {
-      console.error(e);
+    } catch {
       set({ authUser: null });
     } finally{
       set({ ischeckingAuth: false });
@@ -42,17 +44,21 @@ export const useAuthStore = create<AuthStore>((set) => ({
   },
   
   isLoggingInOrSigningOut: false,
+  authError: null,
+
   logInRequest: async (data) => {
     try{
       set({ isLoggingInOrSigningOut: true});
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data});
-    }catch(e){
-      console.error(e);
-    } finally {
+    }catch (e) {
+      // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
+     set({ authError: e.response?.data?.message  });
+ } finally {
       set({ isLoggingInOrSigningOut: false});
     }
   },
+  
 
   signUpRequest : async (data) => {
     try{
@@ -70,5 +76,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  authError: null
+  
+  rebootAuthError: () => {
+    set({ authError: null });
+  }
+
+ 
 }));

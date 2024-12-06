@@ -85,7 +85,7 @@ const LogForm = (props: LogFormProps) => {
               type={showPassword ? "text" : "password"}
               placeholder="Min. 6 caracteres"
               className="font-montserrat pl-12 "
-              {...register("password", { required: true })}
+              {...register("password", { required: true, minLength: 6 })}
             />
             {!showPassword ? (
               <EyeOff

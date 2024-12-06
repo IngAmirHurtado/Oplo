@@ -1,5 +1,6 @@
 
 import { ThemeProvider } from "@/components/theme/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 import {  Routes, Route } from 'react-router-dom'
 
 import LogInPage from "./pages/LogInPage"
@@ -43,6 +44,7 @@ function App() {
               </Route>
 
           </Routes>
+          <Toaster />
           </ThemeProvider>
         
   

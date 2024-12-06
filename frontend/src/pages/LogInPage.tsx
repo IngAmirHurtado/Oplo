@@ -6,8 +6,12 @@ import WelcomePanel from "@/components/WelcomePanel";
 import { isMobile } from "react-device-detect";
 import LogItem from "@/components/auth/LogItem";
 
+
+
 const LogInPage = () => {
   const { stepCheckMobile } = useGeneralStore();
+ 
+
 
   return (
     <div className="h-full  justify-between flex flex-col p-3 md:p-4  w-screen ">
