@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { PrivateRoutes } from "./components/routes/PrivateRoutes";
 import { PublicRoutes } from "./components/routes/PublicRoutes";
+import MyProfilePage from "./pages/MyProfilePage";
 
 function App() {
   const { checkAuth, ischeckingAuth } = useAuthStore();
@@ -40,6 +41,7 @@ function App() {
 
         <Route element={<PrivateRoutes />}>
           <Route path="/home" element={<HomePage />} />
+          <Route path="/profile" element={<MyProfilePage />} />
         </Route>
       </Routes>
       <Toaster />

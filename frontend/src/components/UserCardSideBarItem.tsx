@@ -2,9 +2,10 @@ import { useAuthStore } from "@/store/useAuthStore";
 
 const UserCardSideBarItem = () => {
   const { authUser } = useAuthStore();
+
   return (
     <div className="bg-muted p-2 rounded-lg flex gap-2 max-sm:pb-10  border-none text-left hover:scale-[1.03] transition">
-      <img src="/imgs/default-user.svg" className="h-9 w-9" />
+      <img src={`${authUser?.profilePic === "" ? "/imgs/default-user.svg" : ""}`} className="h-9 w-9" />
       <div className="flex flex-col justify-center overflow-hidden">
         <p className="font-poppins text-xs truncate w-full overflow-hidden whitespace-nowrap text-ellipsis text-black dark:text-white">
           {authUser?.email}

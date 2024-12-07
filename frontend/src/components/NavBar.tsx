@@ -1,8 +1,10 @@
-import { Bolt, Search } from "lucide-react";
+import {  Search } from "lucide-react";
 import { Input } from "./ui/input";
-import CustomIcon from "./CustomIcon";
+
 import MobileMenu from "./MobileMenu";
 import MyAccountDropdownMenu from "./MyAccountDropdownMenu";
+
+import {ModeToggle} from "../components/theme/mode-toggle";
 
 const NavBar = () => {
   return (
@@ -25,7 +27,7 @@ const NavBar = () => {
         </div>
 
         <div className="w-[100px] md:w-[450px] flex justify-end items-center gap-2 ">
-          <CustomIcon icon={Bolt} variant="outline" />
+          <ModeToggle />
           <MyAccountDropdownMenu site="navbar" />
         </div>
 

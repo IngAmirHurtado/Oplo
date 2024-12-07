@@ -23,14 +23,14 @@ interface MyAccountDropdownMenuProps {
 
 const MyAccountDropdownMenu = (props : MyAccountDropdownMenuProps) => {
   const { site } = props;
-  const {logOutRequest} = useAuthStore();
+  const {authUser, logOutRequest} = useAuthStore();
 
     const navigate = useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         {site === "navbar" ? (
-           <img src="/imgs/default-user.svg" className="w-8 h-8 rounded-full" /> ) : (
+           <img src={`${authUser?.profilePic === "" ? "/imgs/default-user.svg" : ""}`} className="w-8 h-8 rounded-full" /> ) : (
             <UserCardSideBarItem />
            )
         }
@@ -41,11 +41,11 @@ const MyAccountDropdownMenu = (props : MyAccountDropdownMenuProps) => {
           <p className="font-montserrat">Mi cuenta</p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex gap-3" onClick={() => (navigate("/profile"))}>
+        <DropdownMenuItem className="flex gap-3 cursor-pointer" onClick={() => (navigate("/profile"))}>
           <CustomIcon icon={User} variant={"nohover"} />
           <p className="font-poppins">Ir al perfil</p>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex gap-3" onClick={() => {logOutRequest()}}>
+        <DropdownMenuItem className="flex gap-3 cursor-pointer" onClick={() => {logOutRequest()}}>
           <CustomIcon icon={LogOut} variant={"destructive"} />
           <p className="font-poppins">Salir</p>
         </DropdownMenuItem>

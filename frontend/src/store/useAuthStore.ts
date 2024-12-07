@@ -1,11 +1,15 @@
 import { create } from "zustand";
 import { axiosInstance } from "../api/axios.ts";
 
-interface User {
-  id: string;
+export type User = {
+  _id: string;
   email: string;
   username: string;
   profilePic: string;
+  createdAt: string;
+  updatedAt: string;
+  followers: string[];
+  following: string[];
 }
 
 interface LogDataForm {

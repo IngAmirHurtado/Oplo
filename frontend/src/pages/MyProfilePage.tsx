@@ -1,7 +1,15 @@
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/sideBar/SideBar";
+import UserCardInfo from "@/components/UserCardInfo";
+import { CalendarCheck } from "lucide-react";
 
-const HomePage = () => {
+import { useAuthStore } from "@/store/useAuthStore";
+
+const MyProfilePage = () => {
+  const { authUser } = useAuthStore();
+
+  const date = new Date(authUser?.createdAt).toLocaleDateString();
+
   return (
     <div className="w-screen h-screen flex flex-col items-center overflow-hidden bg-muted ">
       <NavBar />
@@ -12,16 +20,21 @@ const HomePage = () => {
         <div className="md:py-3 w-full max-h-full overflow-hidden flex-grow">
           {/* Este div es el que manejará el scroll */}
           <div className="bg-background h-full rounded-lg p-3 overflow-auto max-h-[calc(100vh-88px)]">
-            {/* Contenido principal */}
-            {[...Array(50)].map((_, i) => (
-              <h1 key={i}>HOLAAA</h1>
-            ))}
+            <div className="">
+              <div className="flex w-full justify-end items-center gap-2">
+                <CalendarCheck className="w-4 h-4" />
+                <p className="font-montserrat text-[0.6rem]">
+                  {date}
+                </p>
+              </div>
+
+              <UserCardInfo user={authUser} />
+            </div>
           </div>
         </div>
-       
       </div>
     </div>
   );
 };
 
-export default HomePage;
+export default MyProfilePage;
