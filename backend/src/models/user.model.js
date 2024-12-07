@@ -4,11 +4,11 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
     },
     username: {
         type: String,
         required: true,
+        unique: true,
     },
     password:{
         type: String,
@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
     profilePic: {
         type: String,
         default: "",
+    },
+    followers: {
+        type: Array,
+        default: [],
+    },
+    following:{
+        type: Array,
+        default: [],
     }
 },
 {

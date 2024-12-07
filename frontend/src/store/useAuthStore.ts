@@ -10,12 +10,17 @@ export type User = {
   updatedAt: string;
   followers: string[];
   following: string[];
-}
+};
 
 interface LogDataForm {
-  username?: string;
-  email: string;
+  username: string;
+  email?: string;
   password: string;
+}
+
+interface ChangeGeneralInfo {
+  username: string;
+  email: string;
 }
 
 interface AuthStore {
@@ -30,6 +35,11 @@ interface AuthStore {
   logInRequest: (data: LogDataForm) => Promise<void>;
   signUpRequest: (data: LogDataForm) => Promise<void>;
   logOutRequest: () => Promise<void>;
+
+  changeError: string | null;
+  rebootChangeError: () => void;
+  isChanginInfo: boolean;
+  changeGeneralInfo: (data: ChangeGeneralInfo) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -77,16 +87,35 @@ export const useAuthStore = create<AuthStore>((set) => ({
   },
 
   logOutRequest: async () => {
-    try{
+    try {
       await axiosInstance.get("/auth/logout");
       set({ authUser: null });
-    }
-    catch{
+    } catch {
       set({ authUser: null });
     }
   },
 
   rebootAuthError: () => {
     set({ authError: null });
+  },
+
+  changeError: null,
+
+  rebootChangeError: () => {
+    set({ changeError: null });
+  },
+
+  isChanginInfo: false,
+  changeGeneralInfo: async (data) => {
+    try {
+      set({ isChanginInfo: true });
+      const res = await axiosInstance.put("/user/update-general-info", data);
+      set({ authUser: res.data });
+    } catch (e) {
+      // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
+      set({ changeError: e.response?.data?.message });
+    } finally {
+      set({ isChanginInfo: false });
+    }
   },
 }));

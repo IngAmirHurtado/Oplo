@@ -13,7 +13,7 @@ const UserCardInfo = (props: UserCardInfoProps) => {
   const { user, isMyProfile, setIsEditing } = props;
   return (
     <div className="flex flex-col justify-center items-center gap-4 ">
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-7 items-center">
         <img
           src={`${user?.profilePic === "" ? "/imgs/default-user.svg" : ""}`}
           className="h-24 w-24"
@@ -39,13 +39,13 @@ const UserCardInfo = (props: UserCardInfoProps) => {
       <div className="flex justify-center gap-16 md:gap-20  w-full font-poppins ">
         <div className="flex flex-col gap-1 items-center">
           <div className="w-8 h-8 grid place-items-center bg-primary rounded-lg">
-            <p className="text-muted "> {user?.followers.length}</p>
+            <p className="text-muted "> {user?.followers?.length}</p>
           </div>
           <p className="text-xs text-slate-500">Followers</p>
         </div>
         <div className="flex flex-col gap-1  items-center">
           <div className="w-8 h-8 grid place-items-center bg-primary rounded-lg">
-            <p className="text-muted "> {user?.following.length}</p>
+            <p className="text-muted "> {user?.following?.length}</p>
           </div>
           <p className="text-xs text-slate-500">Following</p>
         </div>

@@ -13,7 +13,7 @@ const MyProfilePage = () => {
   const { authUser } = useAuthStore();
   const [isEditing, setIsEditing] = useState(false);
 
-  const date = new Date(authUser?.createdAt).toLocaleDateString();
+  const date = authUser ? new Date(authUser?.createdAt).toLocaleDateString() : "Fecha no disponible";
 
   return (
     <div className="w-screen h-screen flex flex-col items-center overflow-hidden bg-muted">

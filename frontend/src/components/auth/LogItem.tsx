@@ -21,7 +21,6 @@ const LogItem = (props: LogItemProps) => {
 
   useEffect(() => {
     if (authError) {
-      console.log("entro");
       toast({
         variant: "destructive",
         title: "Oh oh! Algo salió mal.",

@@ -13,9 +13,9 @@ export const signup = async (req, res) => {
       .status(400)
       .json({ message: "La contraseña debe tener al menos 6 caracteres" });
 
-  const emailExist = await User.findOne({ email });
-  if (emailExist)
-    return res.status(400).json({ message: "Este email está en uso" });
+  const usernameExist = await User.findOne({ username });
+  if (usernameExist)
+    return res.status(400).json({ message: "Este username está en uso" });
 
   const hashPassword = await bcrypts.hash(password, 10);
 
@@ -37,25 +37,27 @@ export const signup = async (req, res) => {
 });
 
   return res.status(200).json({ 
-    id: newUser._id,
+    _id: newUser._id,
     email: newUser.email,
     username: newUser.username,
     profilePic: newUser.profilePic,
-    created: newUser.createdAt,
-    submited: newUser.updatedAt
+    createdAt: newUser.createdAt,
+    submitedAt: newUser.updatedAt,
+    following: newUser.following,
+    followers: newUser.followers
    });
 };
 
 export const login = async (req, res) => {
-    const {email, password} = req.body;
+    const {username, password} = req.body;
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({username});
 
-    if(!user) return res.status(400).json({message: "Email o contraseña incorrectos"});
+    if(!user) return res.status(400).json({message: "Username o contraseña incorrectos"});
 
     const matchPassword = await bcrypts.compare(password, user.password);
 
-    if(!matchPassword) return res.status(400).json({message: "Email o contraseña incorrectos"});
+    if(!matchPassword) return res.status(400).json({message: "Username o contraseña incorrectos"});
 
     const token = await createToken({id: user._id});
 
@@ -66,12 +68,15 @@ export const login = async (req, res) => {
     });
 
     return res.status(200).json({
-        id: user._id,
+        _id: user._id,
         email: user.email,
         username: user.username,
         profilePic: user.profilePic,
-        created: user.createdAt,
-        submited: user.updatedAt
+        createdAt: user.createdAt,
+        submitedAt: user.updatedAt,
+        following: user.following,
+        followers: user.followers
+
     });
 };
 
@@ -85,7 +90,6 @@ export const logout = async (req, res) => {
 export const checkAuth = async (req, res) => {
     try {
       res.status(200).json(req.user);
-      console.log(req.user);
     }
     catch (error) {
       res.status(400).json({ message: error.message });

@@ -15,8 +15,8 @@ interface LogFormProps {
 }
 
 interface LogDataForm {
-  username?: string;
-  email: string;
+  username: string;
+  email?: string;
   password: string;
 }
 
@@ -41,9 +41,9 @@ const LogForm = (props: LogFormProps) => {
       className="mt-6 w-full md:max-w-full md:w-[30rem] max-h-full flex flex-col gap-5 overflow-hidden  p-1 "
       onSubmit={handleSubmit(onSubmit)}
     >
-      {type === "signup" && (
+      
         <div>
-          <p className="font-poppins pb-1">Nombre de usuario</p>
+          <p className="font-poppins pb-2 text-sm">Nombre de usuario</p>
           <div className="relative">
             <User
               strokeWidth={1}
@@ -57,9 +57,10 @@ const LogForm = (props: LogFormProps) => {
             />
           </div>
         </div>
-      )}
+     
+      {type === "signup" && (
       <div>
-        <p className="font-poppins pb-1">Email</p>
+        <p className="font-poppins pb-2 text-sm">Email</p>
         <div className="relative">
           <Mail
             strokeWidth={1}
@@ -73,8 +74,9 @@ const LogForm = (props: LogFormProps) => {
           />
         </div>
       </div>
+       )}
       <div>
-        <p className="font-poppins  pb-1">Contraseña</p>
+        <p className="font-poppins pb-2 text-sm">Contraseña</p>
         <div className="relative">
           <Lock
             strokeWidth={1}
