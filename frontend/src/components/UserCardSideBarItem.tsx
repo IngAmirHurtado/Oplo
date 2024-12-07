@@ -11,7 +11,7 @@ const UserCardSideBarItem = () => {
           {authUser?.email}
         </p>
         <p className="font-montserrat text-xs text-gray-500 truncate w-36 overflow-hidden whitespace-nowrap text-ellipsis">
-          {authUser?.username}
+          @{authUser?.username}
         </p>
       </div>
     </div>

@@ -23,12 +23,12 @@ const MyProfilePage = () => {
             <div className="">
               <div className="flex w-full justify-end items-center gap-2">
                 <CalendarCheck className="w-4 h-4" />
-                <p className="font-montserrat text-[0.6rem]">
+                <p className="font-montserrat text-[0.7rem]">
                   {date}
                 </p>
               </div>
 
-              <UserCardInfo user={authUser} />
+              <UserCardInfo user={authUser} isMyProfile={true} />
             </div>
           </div>
         </div>
