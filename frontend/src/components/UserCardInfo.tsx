@@ -5,11 +5,12 @@ import CustomIcon from "./CustomIcon";
 
 interface UserCardInfoProps {
   user: User | null;
-    isMyProfile: boolean;
+  isMyProfile: boolean;
+    setIsEditing?: (value: boolean) => void;
 }
 
 const UserCardInfo = (props: UserCardInfoProps) => {
-  const { user, isMyProfile } = props;
+  const { user, isMyProfile, setIsEditing } = props;
   return (
     <div className="flex flex-col justify-center items-center gap-4 ">
       <div className="flex flex-col gap-2 items-center">
@@ -28,11 +29,11 @@ const UserCardInfo = (props: UserCardInfoProps) => {
       <div className="w-full relative mt-6">
         <Separator />
         {isMyProfile && (
-        <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2  hover:text-slate-500 trasnsition">
-          <CustomIcon icon={UserPen} variant="nohover" />
-        </div>
+          <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2  hover:text-slate-500 trasnsition" 
+          onClick={() => setIsEditing && setIsEditing(true)}>
+            <CustomIcon icon={UserPen} variant="nohover" />
+          </div>
         )}
-        
       </div>
 
       <div className="flex justify-center gap-16 md:gap-20  w-full font-poppins ">

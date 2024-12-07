@@ -43,7 +43,7 @@ const LogForm = (props: LogFormProps) => {
     >
       {type === "signup" && (
         <div>
-          <p className="font-montserrat pb-1">Nombre de usuario</p>
+          <p className="font-poppins pb-1">Nombre de usuario</p>
           <div className="relative">
             <User
               strokeWidth={1}
@@ -59,7 +59,7 @@ const LogForm = (props: LogFormProps) => {
         </div>
       )}
       <div>
-        <p className="font-montserrat pb-1">Email</p>
+        <p className="font-poppins pb-1">Email</p>
         <div className="relative">
           <Mail
             strokeWidth={1}
@@ -74,7 +74,7 @@ const LogForm = (props: LogFormProps) => {
         </div>
       </div>
       <div>
-        <p className="font-montserrat  pb-1">Contraseña</p>
+        <p className="font-poppins  pb-1">Contraseña</p>
         <div className="relative">
           <Lock
             strokeWidth={1}
@@ -101,7 +101,7 @@ const LogForm = (props: LogFormProps) => {
           )}
         </div>
       </div>
-      <Button type="submit" className="mt-7 font-poppins">
+      <Button type="submit" className="mt-7 font-montserrat">
         {isLoggingInOrSigningOut ? (
           <div className="flex items-center justify-center h-screen">
             <Loader
