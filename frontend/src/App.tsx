@@ -1,16 +1,23 @@
-import { ThemeProvider } from "@/components/theme/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
+import { useEffect } from "react";
+
 import { Routes, Route } from "react-router-dom";
 
-import LogInPage from "./pages/LogInPage";
-import SignUp from "./pages/SignUpPage";
-import HomePage from "./pages/HomePage";
 import { useAuthStore } from "./store/useAuthStore";
-import { useEffect } from "react";
+
+import { ThemeProvider } from "@/components/theme/theme-provider";
+
+import PrivateRoutes from "@/components/routes/PrivateRoutes";
+import PublicRoutes from "@/components/routes/PublicRoutes";
+
+import LogInPage from "@/pages/LogInPage";
+import SignUp from "@/pages/SignUpPage";
+
+import HomePage from "@/pages/HomePage";
+import MyProfilePage from "@/pages/MyProfilePage";
+
+import { Toaster } from "@/components/ui/toaster";
+
 import { Loader } from "lucide-react";
-import { PrivateRoutes } from "./components/routes/PrivateRoutes";
-import { PublicRoutes } from "./components/routes/PublicRoutes";
-import MyProfilePage from "./pages/MyProfilePage";
 
 function App() {
   const { checkAuth, loading } = useAuthStore();

@@ -1,9 +1,9 @@
-import MyAccountDropdownMenu from "../MyAccountDropdownMenu";
+import MyAccountDropdownMenu from "@/components/MyAccountDropdownMenu";
+import SiderItem from "@/components/sideBar/SiderItem";
+
 import { dataGeneralSideBar } from "./SideBarRotes.data";
-import  SiderItem  from "./SiderItem";
 
 const SideBarRoutes = () => {
-
   return (
     <div className="flex h-full flex-col justify-between p-3">
       <div className="flex flex-col gap-3">
@@ -20,9 +20,7 @@ const SideBarRoutes = () => {
         </div>
       </div>
 
-     
-        <MyAccountDropdownMenu site="sidebar"/>
-    
+      <MyAccountDropdownMenu site="sidebar" />
     </div>
   );
 };

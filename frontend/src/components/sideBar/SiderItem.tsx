@@ -1,6 +1,8 @@
-import { LucideIcon } from 'lucide-react';
 import {Link} from 'react-router-dom';
-import CustomIcon from '../CustomIcon';
+
+import CustomIcon from '@/components/CustomIcon';
+
+import { LucideIcon } from 'lucide-react';
 
 interface SiderItemProps {
     title: string;

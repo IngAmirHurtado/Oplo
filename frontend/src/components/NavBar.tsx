@@ -1,10 +1,12 @@
-import {  Search } from "lucide-react";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 
-import MobileMenu from "./MobileMenu";
-import MyAccountDropdownMenu from "./MyAccountDropdownMenu";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 
-import {ModeToggle} from "../components/theme/mode-toggle";
+import MobileMenu from "@/components/MobileMenu";
+
+import MyAccountDropdownMenu from "@/components/MyAccountDropdownMenu";
+
+import { Search } from "lucide-react";
 
 const NavBar = () => {
   return (
@@ -30,8 +32,6 @@ const NavBar = () => {
           <ModeToggle />
           <MyAccountDropdownMenu site="navbar" />
         </div>
-
-        
       </div>
     </div>
   );

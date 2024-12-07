@@ -1,4 +1,4 @@
-import SideBarRoutes from "./SideBarRoutes"
+import SideBarRoutes from "@/components/sideBar/SideBarRoutes"
 
 const SideBar = () => {
   return (

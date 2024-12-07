@@ -1,4 +1,13 @@
+import { useEffect } from "react";
+
+import { useAuthStore } from "@/store/useAuthStore";
+
+import { useForm } from "react-hook-form";
+
+import { useToast } from "@/hooks/use-toast";
+
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -11,16 +20,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 
-import { useAuthStore } from "@/store/useAuthStore";
-
-import { useForm } from "react-hook-form";
+import { ToastAction } from "@/components/ui/toast";
 
 import { Loader } from "lucide-react";
-
-import { useToast } from "@/hooks/use-toast"
-import { useEffect } from "react";
-
-import { ToastAction } from "@/components/ui/toast";
 
 interface ChangeInfoAccountProps {
   setIsEditing: (value: boolean) => void;
@@ -32,27 +34,27 @@ interface DataForm {
 }
 
 const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
-  const { authUser, changeGeneralInfo, loading, error, clearError } = useAuthStore();
+  const { authUser, changeGeneralInfo, loading, error, clearError } =
+    useAuthStore();
   const { setIsEditing } = props;
   const { register, handleSubmit } = useForm<DataForm>();
   const { toast } = useToast();
 
   const onSubmit = async (data: DataForm) => {
-      await changeGeneralInfo(data);
-      setIsEditing(false);
+    await changeGeneralInfo(data);
+    setIsEditing(false);
   };
 
   useEffect(() => {
-    if(error.type === "changeInfo") {
+    if (error.type === "changeInfo") {
       toast({
         variant: "destructive",
         title: "Oh oh! Algo salió mal.",
         description: error.message,
-        action: <ToastAction altText="Try again">Aceptar</ToastAction>
+        action: <ToastAction altText="Try again">Aceptar</ToastAction>,
       });
       clearError();
     }
-
   }, [error, toast, clearError]);
 
   return (
@@ -93,16 +95,17 @@ const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
             </CardContent>
             <CardFooter className="flex gap-2">
               <Button className="font-montserrat" type="submit">
-                {(loading.type === "changingInfo" && loading.isLoading )  ? (
+                {loading.type === "changingInfo" && loading.isLoading ? (
                   <div className="flex items-center justify-center w-full">
-                  <Loader
-                    className=" animate-spin "
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  />
-                </div>
-                ) : "Guardar cambios"}
-                
+                    <Loader
+                      className=" animate-spin "
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    />
+                  </div>
+                ) : (
+                  "Guardar cambios"
+                )}
               </Button>
               <Button
                 variant="destructive"

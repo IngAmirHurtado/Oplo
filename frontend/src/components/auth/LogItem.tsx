@@ -1,14 +1,17 @@
-import CustomIcon from "../CustomIcon";
-import LogForm from "./LogForm";
+import { useEffect } from "react";
 
-import { useAuthStore } from "../../store/useAuthStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 import { useToast } from "@/hooks/use-toast";
+
+import CustomIcon from "@/components/CustomIcon";
+
+import LogForm from "@/components/auth/LogForm";
 
 import { ToastAction } from "@/components/ui/toast";
 
 import { LogInIcon, AtSign } from "lucide-react";
-import { useEffect } from "react";
+
 
 interface LogItemProps {
   type: string;
