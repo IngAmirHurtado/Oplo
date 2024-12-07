@@ -4,6 +4,9 @@
 interface GeneralStore {
     stepCheckMobile: boolean;
     setStepCheckMobile: (() => void) | null;
+
+    previewProfilePic: string | null;
+    setPreviewProfilePic: (value: string | null) => void;
 }
 
 
@@ -12,6 +15,11 @@ interface GeneralStore {
     stepCheckMobile: false,
     setStepCheckMobile: () => {
         set({ stepCheckMobile: true });
+    },
+
+    previewProfilePic: null,
+    setPreviewProfilePic: (value) => {
+        set({ previewProfilePic: value });
     }
   
  }));

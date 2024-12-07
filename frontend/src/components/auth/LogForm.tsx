@@ -42,13 +42,14 @@ const LogForm = (props: LogFormProps) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>
-        <p className="font-poppins pb-2 text-sm">Nombre de usuario</p>
+        <label htmlFor="username" className="font-poppins pb-2 text-sm">Nombre de usuario</label>
         <div className="relative">
           <User
             strokeWidth={1}
             className="absolute top-[.7rem] left-3 w-5 h-5  text-slate-400"
           />
           <Input
+            id="username"
             placeholder="username"
             className="font-montserrat pl-12"
             type={"text"}
@@ -59,13 +60,14 @@ const LogForm = (props: LogFormProps) => {
 
       {type === "signup" && (
         <div>
-          <p className="font-poppins pb-2 text-sm">Email</p>
+          <label htmlFor="email" className="font-poppins pb-2 text-sm">Email</label>
           <div className="relative">
             <Mail
               strokeWidth={1}
               className="absolute top-[.7rem] left-3 w-5 h-5  text-slate-400"
             />
             <Input
+              id="email"
               placeholder="tu@ejemplo.com"
               className="font-montserrat pl-12"
               type={"email"}
@@ -75,13 +77,14 @@ const LogForm = (props: LogFormProps) => {
         </div>
       )}
       <div>
-        <p className="font-poppins pb-2 text-sm">Contraseña</p>
+        <label htmlFor="password" className="font-poppins pb-2 text-sm">Contraseña</label>
         <div className="relative">
           <Lock
             strokeWidth={1}
             className="absolute top-[.7rem] left-3 w-5 h-5 text-slate-400"
           />
           <Input
+            id="password"
             type={showPassword ? "text" : "password"}
             placeholder="Min. 6 caracteres"
             className="font-montserrat pl-12 "

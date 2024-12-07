@@ -1,3 +1,5 @@
+import { useGeneralStore } from "@/store/useGeneral";
+
 import { User } from "@/store/useAuthStore";
 
 import { Separator } from "@/components/ui/separator";
@@ -8,6 +10,7 @@ import EditProfilePic from "@/components/EditProfilePic";
 
 import { UserPen } from "lucide-react";
 
+
 interface UserCardInfoProps {
   user: User | null;
   isMyProfile: boolean;
@@ -16,13 +19,15 @@ interface UserCardInfoProps {
 
 const UserCardInfo = (props: UserCardInfoProps) => {
   const { user, isMyProfile, setIsEditing } = props;
+  const { previewProfilePic} = useGeneralStore();
+
   return (
     <div className="flex flex-col justify-center items-center gap-4 ">
       <div className="flex flex-col gap-7 items-center">
         <div className="relative">
           <img
-            src={`${user?.profilePic === "" ? "/imgs/default-user.svg" : ""}`}
-            className="h-24 w-24"
+            src={`${previewProfilePic ? previewProfilePic : (user?.profilePic === "" ? "/imgs/default-user.svg"  : user?.profilePic )}` }
+            className="h-24 w-24 rounded-full"
           />
 
           {isMyProfile && <EditProfilePic />}

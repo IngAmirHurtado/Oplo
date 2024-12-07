@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useAuthStore } from "@/store/useAuthStore";
 
+import { useGeneralStore } from "@/store/useGeneral";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +26,10 @@ interface MyAccountDropdownMenuProps {
 const MyAccountDropdownMenu = (props: MyAccountDropdownMenuProps) => {
   const { site } = props;
   const { authUser, logOutRequest } = useAuthStore();
+  const { previewProfilePic } = useGeneralStore();
+
+  console.log(previewProfilePic)
+  console.log(authUser?.profilePic)
 
   const navigate = useNavigate();
   return (
@@ -31,9 +37,7 @@ const MyAccountDropdownMenu = (props: MyAccountDropdownMenuProps) => {
       <DropdownMenuTrigger>
         {site === "navbar" ? (
           <img
-            src={`${
-              authUser?.profilePic === "" ? "/imgs/default-user.svg" : ""
-            }`}
+          src={`${previewProfilePic ? previewProfilePic : (authUser?.profilePic === "" ? "/imgs/default-user.svg"  : authUser?.profilePic )}` }
             className="w-8 h-8 rounded-full"
           />
         ) : (

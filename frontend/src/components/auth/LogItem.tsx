@@ -2,6 +2,8 @@ import { useEffect } from "react";
 
 import { useAuthStore } from "@/store/useAuthStore";
 
+import { useGeneralStore } from "@/store/useGeneral";
+
 import { useToast } from "@/hooks/use-toast";
 
 import CustomIcon from "@/components/CustomIcon";
@@ -20,7 +22,12 @@ interface LogItemProps {
 const LogItem = (props: LogItemProps) => {
   const { type } = props;
   const { error, clearError } = useAuthStore();
+  const { setPreviewProfilePic } = useGeneralStore();
   const { toast } = useToast();
+
+  useEffect(() => {
+    setPreviewProfilePic(null);
+  }, [setPreviewProfilePic]);
 
   useEffect(() => {
     if (error.type === "auth") {

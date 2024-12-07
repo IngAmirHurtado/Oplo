@@ -25,8 +25,13 @@ interface ChangeGeneralInfo {
   email: string;
 }
 
+interface ChangeProfilePic {
+  profilePic: string | ArrayBuffer | null;
+}
+
+
 interface LoadingState {
-  type: "checkingAuth" | "log" | "changingInfo" | null;
+  type: "checkingAuth" | "log" | "changingInfo" | "changingProfilePic" | null;
   isLoading: boolean;
 }
 
@@ -39,7 +44,6 @@ interface AuthStore {
   authUser: User | null;
   loading: LoadingState;
   error: ErrorState;
-
   setLoading: (type: LoadingState["type"], isLoading: boolean) => void;
   setError: (type: ErrorState["type"], message: string | null) => void;
   clearError: () => void;
@@ -49,6 +53,7 @@ interface AuthStore {
   signUpRequest: (data: LogDataForm) => Promise<void>;
   logOutRequest: () => Promise<void>;
   changeGeneralInfo: (data: ChangeGeneralInfo) => Promise<void>;
+  changeProfilePic: (data: ChangeProfilePic) => Promise<void>;
 }
 
 
@@ -129,4 +134,16 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ loading: { type: null, isLoading: false } });
     }
   },
+
+  changeProfilePic: async (data) => {
+    try{
+      const res = await axiosInstance.put("/user/update-profile-pic", data);
+      set({ authUser: res.data });
+      console.log(res.data);
+    }
+    catch(e){
+      console.log(e);
+    }
+
+  }
 }));
