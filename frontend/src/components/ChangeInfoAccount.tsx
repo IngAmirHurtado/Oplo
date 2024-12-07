@@ -32,7 +32,7 @@ interface DataForm {
 }
 
 const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
-  const { authUser, changeGeneralInfo, isChanginInfo, changeError, rebootChangeError } = useAuthStore();
+  const { authUser, changeGeneralInfo, loading, error, clearError } = useAuthStore();
   const { setIsEditing } = props;
   const { register, handleSubmit } = useForm<DataForm>();
   const { toast } = useToast();
@@ -43,17 +43,17 @@ const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
   };
 
   useEffect(() => {
-    if(changeError){
+    if(error.type === "changeInfo") {
       toast({
         variant: "destructive",
         title: "Oh oh! Algo salió mal.",
-        description: changeError,
+        description: error.message,
         action: <ToastAction altText="Try again">Aceptar</ToastAction>
       });
-      rebootChangeError();
+      clearError();
     }
 
-  }, [changeError, toast, rebootChangeError]);
+  }, [error, toast, clearError]);
 
   return (
     <Tabs defaultValue="account" className="w-[400px]">
@@ -93,7 +93,7 @@ const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
             </CardContent>
             <CardFooter className="flex gap-2">
               <Button className="font-montserrat" type="submit">
-                {isChanginInfo ? (
+                {(loading.type === "changingInfo" && loading.isLoading )  ? (
                   <div className="flex items-center justify-center w-full">
                   <Loader
                     className=" animate-spin "

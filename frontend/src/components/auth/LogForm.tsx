@@ -22,7 +22,7 @@ interface LogDataForm {
 
 const LogForm = (props: LogFormProps) => {
   const { type } = props;
-  const { logInRequest, signUpRequest, isLoggingInOrSigningOut } =
+  const { logInRequest, signUpRequest, loading } =
     useAuthStore();
 
   const { register, handleSubmit } = useForm<LogDataForm>();
@@ -104,7 +104,7 @@ const LogForm = (props: LogFormProps) => {
         </div>
       </div>
       <Button type="submit" className="mt-7 font-montserrat">
-        {isLoggingInOrSigningOut ? (
+        {(loading.type === "log" && loading.isLoading) ? (
           <div className="flex items-center justify-center h-screen">
             <Loader
               className=" animate-spin"

@@ -16,20 +16,20 @@ interface LogItemProps {
 
 const LogItem = (props: LogItemProps) => {
   const { type } = props;
-  const { authError, rebootAuthError } = useAuthStore();
+  const { error, clearError } = useAuthStore();
   const { toast } = useToast();
 
   useEffect(() => {
-    if (authError) {
+    if (error.type === "auth") {
       toast({
         variant: "destructive",
         title: "Oh oh! Algo salió mal.",
-        description: authError,
+        description: error.message,
         action: <ToastAction altText="Try again">Aceptar</ToastAction>
       });
-      rebootAuthError();
+      clearError();
     }
-  }, [authError, toast, rebootAuthError]);
+  }, [error, toast, clearError]);
 
   return (
     <div className="flex flex-col items-center  justify-center gap-5 w-full md:w-[500px] overflow-scroll md:overflow-hidden  mt-12 md:mt-0">

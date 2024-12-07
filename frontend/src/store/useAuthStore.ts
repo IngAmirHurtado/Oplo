@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { axiosInstance } from "../api/axios.ts";
+import axios from "axios";
 
+// Tipos
 export type User = {
   _id: string;
   email: string;
@@ -23,66 +25,85 @@ interface ChangeGeneralInfo {
   email: string;
 }
 
+interface LoadingState {
+  type: "checkingAuth" | "log" | "changingInfo" | null;
+  isLoading: boolean;
+}
+
+interface ErrorState {
+  type: "auth" | "changeInfo" | null;
+  message: string | null;
+}
+
 interface AuthStore {
   authUser: User | null;
-  ischeckingAuth: boolean;
+  loading: LoadingState;
+  error: ErrorState;
+
+  setLoading: (type: LoadingState["type"], isLoading: boolean) => void;
+  setError: (type: ErrorState["type"], message: string | null) => void;
+  clearError: () => void;
+
   checkAuth: () => Promise<void>;
-
-  isLoggingInOrSigningOut: boolean;
-  authError: string | null;
-  rebootAuthError: () => void;
-
   logInRequest: (data: LogDataForm) => Promise<void>;
   signUpRequest: (data: LogDataForm) => Promise<void>;
   logOutRequest: () => Promise<void>;
-
-  changeError: string | null;
-  rebootChangeError: () => void;
-  isChanginInfo: boolean;
   changeGeneralInfo: (data: ChangeGeneralInfo) => Promise<void>;
 }
 
+
+// Implementación del store
 export const useAuthStore = create<AuthStore>((set) => ({
   authUser: null,
-  ischeckingAuth: true,
+  loading: { type: null, isLoading: false },
+  error: { type: null, message: null },
+
+  setLoading: (type, isLoading) => set({ loading: { type, isLoading } }),
+  setError: (type, message) => set({ error: { type, message } }),
+  clearError: () => set({ error: { type: null, message: null } }),
+
   checkAuth: async () => {
+    set({ loading: { type: "checkingAuth", isLoading: true } });
     try {
       const res = await axiosInstance.get("/auth/check");
       set({ authUser: res.data });
     } catch {
       set({ authUser: null });
     } finally {
-      set({ ischeckingAuth: false });
+      set({ loading: { type: null, isLoading: false } });
     }
   },
 
-  isLoggingInOrSigningOut: false,
-  authError: null,
-
   logInRequest: async (data) => {
+    set({ loading: { type: "log", isLoading: true } });
     try {
-      set({ isLoggingInOrSigningOut: true });
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
     } catch (e) {
-      // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
-      set({ authError: e.response?.data?.message });
+       if(axios.isAxiosError(e) && e.response){
+        set({ error: { type: "auth", message: e.response.data.message } });
+       } else {
+        set({ error: { type: "auth", message: "Error de conexión" } });
+      }
     } finally {
-      set({ isLoggingInOrSigningOut: false });
+      set({ loading: { type: null, isLoading: false } });
     }
   },
 
   signUpRequest: async (data) => {
+    set({ loading: { type: "log", isLoading: true } });
     try {
-      set({ isLoggingInOrSigningOut: true });
       const res = await axiosInstance.post("/auth/signup", data);
-      console.log(res.data);
       set({ authUser: res.data });
-    } catch (e: unknown) {
-      // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
-      set({ authError: e.response?.data?.message || "Error desconocido" });
+    } catch (e) {
+        if(axios.isAxiosError(e) && e.response){
+          set({ error: { type: "auth", message: e.response.data.message } });
+        }
+        else {
+          set({ error: { type: "auth", message: "Error de conexión" } });
+        }
     } finally {
-      set({ isLoggingInOrSigningOut: false });
+      set({ loading: { type: null, isLoading: false } });
     }
   },
 
@@ -95,27 +116,17 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  rebootAuthError: () => {
-    set({ authError: null });
-  },
-
-  changeError: null,
-
-  rebootChangeError: () => {
-    set({ changeError: null });
-  },
-
-  isChanginInfo: false,
   changeGeneralInfo: async (data) => {
+    set({ loading: { type: "changingInfo", isLoading: true } });
     try {
-      set({ isChanginInfo: true });
       const res = await axiosInstance.put("/user/update-general-info", data);
       set({ authUser: res.data });
     } catch (e) {
-      // @ts-expect-error Esto ignora el error al acceder a propiedades en un tipo 'unknown'
-      set({ changeError: e.response?.data?.message });
+      if(axios.isAxiosError(e) && e.response){
+        set({ error: { type: "changeInfo", message: e.response.data.message } });
+      }
     } finally {
-      set({ isChanginInfo: false });
+      set({ loading: { type: null, isLoading: false } });
     }
   },
 }));

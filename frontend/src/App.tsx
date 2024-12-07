@@ -13,13 +13,13 @@ import { PublicRoutes } from "./components/routes/PublicRoutes";
 import MyProfilePage from "./pages/MyProfilePage";
 
 function App() {
-  const { checkAuth, ischeckingAuth } = useAuthStore();
+  const { checkAuth, loading } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  if (ischeckingAuth) {
+  if (loading.type === "checkingAuth" && loading.isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader
