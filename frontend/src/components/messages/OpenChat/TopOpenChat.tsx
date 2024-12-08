@@ -23,7 +23,7 @@ const TopChatContainer = () => {
             className="w-10 h-10 rounded-full"
           />
           <div className="flex flex-col justify-between">
-            <p className="text-sm">
+            <p className="text-sm font-poppins">
               {userChatSelected && userChatSelected.username}
             </p>
             <p>.</p>
@@ -34,9 +34,9 @@ const TopChatContainer = () => {
                 <ModeToggle />
             </div>
             
-            <button  onClick={() => setChatSelected(null)}>
+            <div  onClick={() => setChatSelected(null)}>
           <CustomIcon icon={X} variant='destructive' />
-        </button> 
+        </div> 
         </div>
        
       </div>

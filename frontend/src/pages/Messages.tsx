@@ -3,8 +3,8 @@ import { useMessageStore } from "@/store/useMessageStore";
 import NavBar from "@/components/navBar/NavBar";
 import SideBar from "@/components/sideBar/SideBar";
 
-import  OpenChat  from "@/components/messages/chatOpen/OpenChat";
-import TopOpenChat from "@/components/messages/chatOpen/TopOpenChat";
+import  OpenChatContainer  from "@/components/messages/OpenChat/OpenChatContainer";
+import TopOpenChat from "@/components/messages/OpenChat/TopOpenChat";
 import ChatsContainer from "@/components/messages/chatsContainer/ChatsContainer";
 
 
@@ -29,9 +29,9 @@ const MessagesPage = () => {
         </div>
         <div className="md:py-3 w-full max-h-full overflow-hidden flex-grow">
          
-          <div className="h-full p-3 bg-background md:max-h-[calc(100vh-88px)] ">
+          <div className="h-full p-3 bg-background rounded-lg md:max-h-[calc(100vh-88px)] ">
             
-                 {userChatSelected ? <OpenChat />  : (
+                 {userChatSelected ? <OpenChatContainer />  : (
                   <ChatsContainer />
                  )}
            

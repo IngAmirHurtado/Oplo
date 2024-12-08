@@ -42,7 +42,7 @@ export const getMessages = async (req, res) => {
 //REAL TIME
 export const sendMessage = async(req, res) => {
     const { text, image}  = req.body
-    const { id: receivedId} = req.params;
+    const {receivedId} = req.params;
     const myId = req.user._id;
 
     let imageUrl;

@@ -23,6 +23,12 @@ interface Messages {
     _id: string;
 }
 
+interface FormData {
+    text?: string;
+    image?: File;
+    receiverId: string;
+}
+
 interface MessageStore {
     loading: Loading
     usersWithChat: User[];
@@ -35,6 +41,7 @@ interface MessageStore {
     messages: Messages[];
     getMessages: (userId : string) => Promise<void>;
 
+    sendMessage: (data: FormData) => Promise<void>;
 }
 
 
@@ -74,6 +81,22 @@ export const useMessageStore = create<MessageStore>((set) => ({
             set({messages: res.data})
         }catch{
             console.log('error al obtener mensajes')
+        }
+    },
+
+
+    sendMessage: async (data) => {
+        try{
+            const newData = {
+                text: data.text,
+                image: data.image
+            }
+           
+            const response = await axiosInstance.post(`/message/send/${data.receiverId}`, newData)
+            console.log(response.data)
+            
+        }catch{
+            console.log('error al enviar mensaje')
         }
     }
 

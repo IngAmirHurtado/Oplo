@@ -1,19 +1,17 @@
 import { useEffect } from "react";
 
 import { useMessageStore } from "@/store/useMessageStore";
-import TopChatContainer from "./TopOpenChat";
+import TopChatContainer from "@/components/messages/OpenChat/TopOpenChat";
+import SendMessageContainer from "@/components/messages/OpenChat/SendMessageContainer";
 
-const OpenChat = () => {
-  const { userChatSelected, getMessages, messages } = useMessageStore();
+const OpenChatContainer = () => {
+  const { userChatSelected, getMessages } = useMessageStore();
 
   useEffect(() => {
     if (userChatSelected) {
       getMessages(userChatSelected._id);
     }
   }, [getMessages, userChatSelected]);
-
-  console.log(userChatSelected);
-  console.log(messages);
 
   return (
     <div className="flex flex-col justify-between h-full overflow-hidden ">
@@ -24,9 +22,9 @@ const OpenChat = () => {
          <p>CONTENIDO</p> 
       </div>
      
-      <p>Abajo</p>
+      <SendMessageContainer receivedId={userChatSelected && userChatSelected._id}/>
     </div>
   );
 };
 
-export default OpenChat;
+export default OpenChatContainer;
