@@ -6,14 +6,34 @@ interface Loading {
     isLoading: boolean;
 }
 
+interface User {
+    _id: string;
+    email: string;
+    username: string;
+    profilePic: string;
+}
+
+interface Messages {
+    senderId: string;
+    receiverId: string;
+    text: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    _id: string;
+}
+
 interface MessageStore {
     loading: Loading
-    usersWithChat: string[];
+    usersWithChat: User[];
     getUsersWithChat: () => Promise<void>;
-    userChatSugesstions: string[];
+    userChatSugesstions: User[];
 
-    userChatSelected : string | null;
-    setChatSelected: (userId: string) => void;
+    userChatSelected : User | null;
+    setChatSelected: (user : User | null) => void;
+    
+    messages: Messages[];
+    getMessages: (userId : string) => Promise<void>;
 
 }
 
@@ -24,9 +44,12 @@ export const useMessageStore = create<MessageStore>((set) => ({
     usersWithChat: [],
     userChatSugesstions: [],
     userChatSelected: null,
-    setChatSelected: (userId: string) => {
-        set({userChatSelected: userId})
+    messages: [],
+
+    setChatSelected: (user) => {
+        set({userChatSelected: user})
     },
+
     getUsersWithChat: async () => {
         try{
             set({loading: {type: 'isLoadingUsersWithChat', isLoading: true}})
@@ -35,15 +58,22 @@ export const useMessageStore = create<MessageStore>((set) => ({
             
 
             if(res.data.length < 4){
-                console.log('no users with chat')
                 const res = await axiosInstance.get('/user/get-random-suggestion');
                 set({userChatSugesstions: res.data})
-                console.log(res.data)
             }
         }catch{
             console.log('error')
         } finally{
             set({loading: {type: null, isLoading: false}})
+        }
+    },
+
+    getMessages: async (userId) => {
+        try{
+            const res = await axiosInstance.get(`/message/get/${userId}`);
+            set({messages: res.data})
+        }catch{
+            console.log('error al obtener mensajes')
         }
     }
 

@@ -20,8 +20,6 @@ const SideBarMessagesContent = () => {
     getUsersWithChat();
   }, [getUsersWithChat]);
 
-  console.log(usersWithChat);
-
   return (
     <div className="flex h-full flex-col justify-between p-3  overflow-auto">
       <div className="flex flex-col gap-3">
@@ -44,7 +42,10 @@ const SideBarMessagesContent = () => {
           ) : (
             <div className="flex flex-col gap-5">
               {usersWithChat &&
-                usersWithChat.map((user) => <UserWithChatCard user={user} />)}
+                usersWithChat.map((user, i) => 
+                <div key={i}>
+                <UserWithChatCard user={user} />
+                </div> )}
 
               {usersWithChat.length === 0 && (
                 <p className="text-xs text-gray-400 md-2">
@@ -56,8 +57,10 @@ const SideBarMessagesContent = () => {
                 <div className="flex flex-col gap-3">
                   <div className="mt-6 flex flex-col gap-3">
                     <p className="text-xs mb-2">Sugerencias para ti</p>
-                    {userChatSugesstions.map((user) => (
+                    {userChatSugesstions.map((user, i) => (
+                      <div key={i}>
                       <UserWithChatCard user={user} />
+                      </div>
                     ))}
                   </div>
                 </div>

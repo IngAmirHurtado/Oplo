@@ -20,7 +20,7 @@ export const usersWithChat = async (req, res) => {
   // Eliminar duplicados usando Set
   const uniqueUsers = [...new Set(users)];
 
-  const usersWithChat = await User.find({_id: {$in: uniqueUsers}}).select('_id username profilePic')
+  const usersWithChat = await User.find({_id: {$in: uniqueUsers}}).select('_id email username profilePic')
 
   res.status(200).json(usersWithChat)
 }
