@@ -13,36 +13,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import UserCardSideBarItem from "@/components/UserCardSideBarItem";
-
 import CustomIcon from "@/components/CustomIcon";
 
 import { LogOut, User } from "lucide-react";
 
-interface MyAccountDropdownMenuProps {
-  site: string;
-}
-
-const MyAccountDropdownMenu = (props: MyAccountDropdownMenuProps) => {
-  const { site } = props;
+const MyAccountDropdownMenu = () => {
   const { authUser, logOutRequest } = useAuthStore();
   const { previewProfilePic } = useGeneralStore();
-
-  console.log(previewProfilePic)
-  console.log(authUser?.profilePic)
 
   const navigate = useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {site === "navbar" ? (
-          <img
-          src={`${previewProfilePic ? previewProfilePic : (authUser?.profilePic === "" ? "/imgs/default-user.svg"  : authUser?.profilePic )}` }
-            className="w-8 h-8 rounded-full"
-          />
-        ) : (
-          <UserCardSideBarItem />
-        )}
+        <img
+          src={`${
+            previewProfilePic
+              ? previewProfilePic
+              : authUser?.profilePic === ""
+              ? "/imgs/default-user.svg"
+              : authUser?.profilePic
+          }`}
+          className="w-8 h-8 rounded-full"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>

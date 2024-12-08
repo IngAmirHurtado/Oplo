@@ -2,7 +2,7 @@
 
 import LogItem from "@/components/auth/LogItem";
 import { ModeToggle } from "@/components/theme/mode-toggle";
-import WelcomePanel from "@/components/WelcomePanel";
+import WelcomePanel from "@/components/auth/WelcomePanel";
 
 const SignUp = () => {
   

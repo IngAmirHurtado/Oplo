@@ -1,7 +1,7 @@
 import { useGeneralStore } from "../store/useGeneral";
 
 import { ModeToggle } from "@/components/theme/mode-toggle";
-import WelcomePanel from "@/components/WelcomePanel";
+import WelcomePanel from "@/components/auth/WelcomePanel";
 
 import { isMobile } from "react-device-detect";
 import LogItem from "@/components/auth/LogItem";

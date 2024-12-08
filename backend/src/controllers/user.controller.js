@@ -1,11 +1,16 @@
 import User from '../models/user.model.js';
 import cloudinary from '../lib/cloudinary.js';
 
-export const getUsersForSideBar = async (req, res) => {
-    const loggedIdUser = req.user._id;
-    const users = await User.find({_id: {$ne: loggedIdUser}}).select('-password');
 
-    res.status(200).json(users);
+export const randomSuggestion = async (req, res) => {
+    const user = req.user;
+
+    const randomUser = await User.aggregate([
+        { $match: { _id: { $ne: user._id } } },  // Correcta forma de usar $ne dentro de $match
+        { $sample: { size: 3 } }  // Obtiene 3 documentos aleatorios
+    ])
+
+    res.status(200).json(randomUser);
 }
 
 

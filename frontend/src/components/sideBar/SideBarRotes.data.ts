@@ -1,10 +1,20 @@
-import { Bell, House, MessageSquare, Telescope } from "lucide-react";
+import { Bell, House, MessageSquare, Telescope, User } from "lucide-react";
 
 export const dataGeneralSideBar = [
     {
         title: 'Principal',
         icon: House,
         href: '/'
+    },
+    {
+        title: 'Perfil',
+        icon: User,
+        href: '/profile'
+    },
+    {
+        title: 'Mensajes',
+        icon: MessageSquare,
+        href: '/messages'
     },
     {
         title: 'Explorar',
@@ -16,9 +26,5 @@ export const dataGeneralSideBar = [
         icon: Bell,
         href: '/notifications'
     }, 
-    {
-        title: 'Mensajes',
-        icon: MessageSquare,
-        href: '/messages'
-    }
+    
 ]

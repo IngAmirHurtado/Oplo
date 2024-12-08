@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 
 import CustomIcon from "@/components/CustomIcon";
 
-import EditProfilePic from "@/components/EditProfilePic";
+import EditProfilePic from "@/components/profile/EditProfilePic";
 
 import { UserPen } from "lucide-react";
 

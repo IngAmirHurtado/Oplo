@@ -2,13 +2,19 @@ import { Input } from "@/components/ui/input";
 
 import { ModeToggle } from "@/components/theme/mode-toggle";
 
-import MobileMenu from "@/components/MobileMenu";
+import MobileMenu from "@/components/navBar/MobileMenu";
 
-import MyAccountDropdownMenu from "@/components/MyAccountDropdownMenu";
+import MyAccountDropdownMenu from "@/components/navBar/MyAccountDropdownMenu";
 
 import { Search } from "lucide-react";
 
-const NavBar = () => {
+interface NavBarProps {
+  messagePage?: boolean;
+}
+
+const NavBar = (props: NavBarProps) => {
+  const { messagePage } = props;
+
   return (
     <div className="h-18 md:h-14 flex w-full justify-center items-center p-3 fixed top-0 left-0 z-10 bg-background">
       <div className="w-full lg:w-[1100px]  flex justify-between">
@@ -18,7 +24,10 @@ const NavBar = () => {
         </div>
 
         <div className=" w-full flex gap-2 items-center">
-          <MobileMenu />
+        
+            <MobileMenu messagePage={messagePage}/>
+       
+          
           <div className="relative w-10/12 md:w-9/12">
             <Search
               strokeWidth={1}
@@ -30,7 +39,7 @@ const NavBar = () => {
 
         <div className="w-[100px] md:w-[450px] flex justify-end items-center gap-2 ">
           <ModeToggle />
-          <MyAccountDropdownMenu site="navbar" />
+          <MyAccountDropdownMenu  />
         </div>
       </div>
     </div>

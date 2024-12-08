@@ -1,5 +1,29 @@
 import cloudinary from "../lib/cloudinary.js";
 import Message from "../models/message.model.js";
+import User from "../models/user.model.js";
+
+
+export const usersWithChat = async (req, res) => {
+  const myId = req.user._id;
+
+  const messages = await Message.find({$or: [
+    {senderId: myId},
+    {receivedId: myId}
+  ]})
+
+  const users = messages.map((message) => {
+    return message.senderId.equals(myId) ? message.receivedId : message.senderId;
+  })
+  
+  
+
+  // Eliminar duplicados usando Set
+  const uniqueUsers = [...new Set(users)];
+
+  const usersWithChat = await User.find({_id: {$in: uniqueUsers}}).select('_id username profilePic')
+
+  res.status(200).json(usersWithChat)
+}
 
 export const getMessages = async (req, res) => {
   const { id: userToChatId } = req.params;

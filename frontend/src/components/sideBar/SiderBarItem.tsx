@@ -10,7 +10,7 @@ interface SiderItemProps {
     href: string;
 }
 
-export const SiderItem = (props : SiderItemProps) => {
+export const SiderBarItem = (props : SiderItemProps) => {
  const { title, icon : Icon, href } = props;
 
   return (
@@ -23,4 +23,4 @@ export const SiderItem = (props : SiderItemProps) => {
   )
 }
 
-export default SiderItem;
+export default SiderBarItem;

@@ -14,10 +14,12 @@ import SignUp from "@/pages/SignUpPage";
 
 import HomePage from "@/pages/HomePage";
 import MyProfilePage from "@/pages/MyProfilePage";
+import MessagesPage from "@/pages/Messages";
 
 import { Toaster } from "@/components/ui/toaster";
 
 import { Loader } from "lucide-react";
+
 
 function App() {
   const { checkAuth, loading } = useAuthStore();
@@ -49,6 +51,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/profile" element={<MyProfilePage />} />
+          <Route path="/messages" element={<MessagesPage />} />
         </Route>
       </Routes>
       <Toaster />

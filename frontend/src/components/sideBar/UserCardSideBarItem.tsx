@@ -6,7 +6,7 @@ const UserCardSideBarItem = () => {
   const { previewProfilePic } = useGeneralStore();
 
   return (
-    <div className="bg-muted p-2 rounded-lg flex gap-2 max-sm:pb-10  border-none text-left hover:scale-[1.03] transition">
+    <div className="bg-muted p-2 rounded-lg flex gap-2 max-sm:pb-10  border-none text-left ">
       <img src={`${previewProfilePic ? previewProfilePic : (authUser?.profilePic === "" ? "/imgs/default-user.svg"  : authUser?.profilePic )}` } className="h-9 w-9 rounded-full" />
       <div className="flex flex-col justify-center overflow-hidden">
         <p className="font-poppins text-xs truncate w-full overflow-hidden whitespace-nowrap text-ellipsis text-black dark:text-white">

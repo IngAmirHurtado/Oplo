@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navBar/NavBar";
 import SideBar from "@/components/sideBar/SideBar";
-import UserCardInfo from "@/components/UserCardInfo";
+import UserCardInfo from "@/components/profile/UserCardInfo";
 import { CalendarCheck } from "lucide-react";
 
-import ChangeInfoAccount from "@/components/ChangeInfoAccount";
+import ChangeInfoAccount from "@/components/profile/ChangeInfoAccount";
 
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -16,7 +16,7 @@ const MyProfilePage = () => {
   const date = authUser ? new Date(authUser?.createdAt).toLocaleDateString() : "Fecha no disponible";
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center overflow-hidden bg-muted">
+    <div className="w-screen h-screen flex flex-col items-center overflow-hidden bg-muted ">
       <NavBar />
       <div className="w-full lg:w-[1100px]  mt-16 h-full flex gap-3 ">
         <div className="min-w-[250px]  py-3 hidden md:block ">
