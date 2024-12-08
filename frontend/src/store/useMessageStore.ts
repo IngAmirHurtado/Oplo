@@ -24,8 +24,8 @@ interface Messages {
 }
 
 interface FormData {
-    text?: string;
-    image?: File;
+    text?: string | null;
+    image?: string | null;
     receiverId: string;
 }
 
@@ -93,7 +93,9 @@ export const useMessageStore = create<MessageStore>((set) => ({
             }
            
             const response = await axiosInstance.post(`/message/send/${data.receiverId}`, newData)
+
             console.log(response.data)
+          
             
         }catch{
             console.log('error al enviar mensaje')
