@@ -1,18 +1,14 @@
 import { useEffect } from "react";
 
-import { Link } from "react-router-dom";
-
 import { useMessageStore } from "@/store/useMessageStore";
 
-import CustomIcon from "@/components/CustomIcon";
+import ChatCard from "@/components/messages/chatsContainer/ChatCard";
 
-import { ArrowLeft } from "lucide-react";
+import SkeletonChatCards from "./SkeletonChatCards";
 
-import UserWithChatCard from "@/components/messages/sideBarMessages/UserWithChatCard";
 
-import SkeletonUsersWithChat from "./SkeletonUsersWithChat";
 
-const SideBarMessagesContent = () => {
+const ChatsContainer = () => {
   const { getUsersWithChat, usersWithChat, loading, userChatSugesstions } =
     useMessageStore();
 
@@ -22,21 +18,13 @@ const SideBarMessagesContent = () => {
 
   return (
     <div className="flex h-full flex-col justify-between p-3  overflow-auto">
-      <div className="flex flex-col gap-3">
-        <Link
-          to="/home"
-          className="flex items-center gap-2 text-gray-500 hover:text-gray-800"
-        >
-          <CustomIcon icon={ArrowLeft} variant="nohover" />
-          <p className="font-poppins text-sm">Página principal</p>
-        </Link>
 
         <div className="flex flex-col gap-3 font-poppins mt-2 w-full">
           <p className="text-xs mb-2">Chats recientes</p>
           {loading.type === "isLoadingUsersWithChat" && loading.isLoading ? (
             <div className="flex flex-col gap-4">
               {Array.from({ length: 2 }, (_, i) => (
-                <SkeletonUsersWithChat key={i} />
+                <SkeletonChatCards key={i} />
               ))}
             </div>
           ) : (
@@ -44,7 +32,7 @@ const SideBarMessagesContent = () => {
               {usersWithChat &&
                 usersWithChat.map((user, i) => 
                 <div key={i}>
-                <UserWithChatCard user={user} />
+                <ChatCard user={user} />
                 </div> )}
 
               {usersWithChat.length === 0 && (
@@ -59,7 +47,7 @@ const SideBarMessagesContent = () => {
                     <p className="text-xs mb-2">Sugerencias para ti</p>
                     {userChatSugesstions.map((user, i) => (
                       <div key={i}>
-                      <UserWithChatCard user={user} />
+                      <ChatCard user={user} />
                       </div>
                     ))}
                   </div>
@@ -67,10 +55,10 @@ const SideBarMessagesContent = () => {
               )}
             </div>
           )}
-        </div>
+    
       </div>
     </div>
   );
 };
 
-export default SideBarMessagesContent;
+export default ChatsContainer;

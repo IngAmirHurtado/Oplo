@@ -55,14 +55,14 @@ const UserCardInfo = (props: UserCardInfoProps) => {
 
       <div className="flex justify-center gap-16 md:gap-20  w-full font-poppins ">
         <div className="flex flex-col gap-1 items-center">
-          <div className="w-8 h-8 grid place-items-center bg-primary rounded-lg">
-            <p className="text-muted "> {user?.followers?.length}</p>
+          <div className="w-8 h-8 grid place-items-center bg-primary/10 rounded-lg">
+            <p className="text-muted-foreground "> {user?.followers?.length}</p>
           </div>
           <p className="text-xs text-slate-500">Followers</p>
         </div>
         <div className="flex flex-col gap-1  items-center">
-          <div className="w-8 h-8 grid place-items-center bg-primary rounded-lg">
-            <p className="text-muted "> {user?.following?.length}</p>
+          <div className="w-8 h-8 grid place-items-center bg-primary/10 rounded-lg">
+            <p className="text-muted-foreground"> {user?.following?.length}</p>
           </div>
           <p className="text-xs text-slate-500">Following</p>
         </div>

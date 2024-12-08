@@ -8,12 +8,10 @@ import MyAccountDropdownMenu from "@/components/navBar/MyAccountDropdownMenu";
 
 import { Search } from "lucide-react";
 
-interface NavBarProps {
-  messagePage?: boolean;
-}
 
-const NavBar = (props: NavBarProps) => {
-  const { messagePage } = props;
+
+const NavBar = () => {
+
 
   return (
     <div className="h-18 md:h-14 flex w-full justify-center items-center p-3 fixed top-0 left-0 z-10 bg-background">
@@ -25,7 +23,7 @@ const NavBar = (props: NavBarProps) => {
 
         <div className=" w-full flex gap-2 items-center">
         
-            <MobileMenu messagePage={messagePage}/>
+            <MobileMenu />
        
           
           <div className="relative w-10/12 md:w-9/12">

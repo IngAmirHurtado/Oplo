@@ -11,9 +11,9 @@ const TopChatContainer = () => {
     const { userChatSelected, setChatSelected } = useMessageStore();
 
   return (
-    <div className="flex justify-between items-center  p-3 bg-muted rounded-lg w-full">
+    <div className="flex justify-between items-center p-3 bg-muted rounded-lg w-full border-b" >
         <div className="flex items-center w-full gap-3">
-        <MobileMenu messagePage={true}/>
+        <MobileMenu />
           <img
             src={`${
               userChatSelected?.profilePic === ""

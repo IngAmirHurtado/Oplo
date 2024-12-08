@@ -1,10 +1,11 @@
 import { useMessageStore } from "@/store/useMessageStore";
 
 import NavBar from "@/components/navBar/NavBar";
-import SideBarMessages from "@/components/messages/sideBarMessages/SideBarMessages";
-import WelcomeMessage from "@/components/messages/WelcomeMessage";
-import  ChatContainer  from "@/components/messages/chatContainer/ChatContainer";
-import TopChatContainer from "@/components/messages/chatContainer/TopChatContainer";
+import SideBar from "@/components/sideBar/SideBar";
+
+import  OpenChat  from "@/components/messages/chatOpen/OpenChat";
+import TopOpenChat from "@/components/messages/chatOpen/TopOpenChat";
+import ChatsContainer from "@/components/messages/chatsContainer/ChatsContainer";
 
 
 const MessagesPage = () => {
@@ -14,24 +15,24 @@ const MessagesPage = () => {
   return (
     <div className="w-screen h-screen flex flex-col items-center overflow-hidden bg-muted ">
 
-      <div className="md:hidden w-full">
-         { userChatSelected ?  <TopChatContainer /> :  <NavBar messagePage={true} />}
+      <div className="md:hidden w-full h-0">
+         { userChatSelected ?  <TopOpenChat /> :  <NavBar />}
       </div>
 
       <div className="hidden md:block">
-        <NavBar messagePage={true} />
+        <NavBar  />
       </div>
      
-      <div className="w-full lg:w-[1100px] mt-0 md:mt-16 h-full flex gap-3 ">
+      <div className="w-full lg:w-[1100px] mt-16 h-full flex gap-3 ">
         <div className="min-w-[250px]  py-3 hidden md:block ">
-          <SideBarMessages />
+          <SideBar />
         </div>
         <div className="md:py-3 w-full max-h-full overflow-hidden flex-grow">
          
-          <div className="bg-background h-full rounded-lg p-3 md:max-h-[calc(100vh-88px)]">
+          <div className="h-full p-3 bg-background md:max-h-[calc(100vh-88px)] ">
             
-                 {userChatSelected ? <ChatContainer />  : (
-                  <WelcomeMessage />
+                 {userChatSelected ? <OpenChat />  : (
+                  <ChatsContainer />
                  )}
            
           </div>

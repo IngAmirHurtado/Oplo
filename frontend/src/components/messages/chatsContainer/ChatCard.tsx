@@ -11,7 +11,7 @@ interface SideBarMUserCardProps {
     user: User 
 }
 
-const UserWithChatCard = (props: SideBarMUserCardProps) => {
+const ChatCard = (props: SideBarMUserCardProps) => {
     const { user } = props;
     const { username, profilePic} = user as User;
     const { setChatSelected } = useMessageStore();
@@ -28,4 +28,4 @@ const UserWithChatCard = (props: SideBarMUserCardProps) => {
   )
 }
 
-export default UserWithChatCard
+export default ChatCard

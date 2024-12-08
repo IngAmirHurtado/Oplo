@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
 import { useMessageStore } from "@/store/useMessageStore";
-import TopChatContainer from "./TopChatContainer";
+import TopChatContainer from "./TopOpenChat";
 
-const ChatContainer = () => {
+const OpenChat = () => {
   const { userChatSelected, getMessages, messages } = useMessageStore();
 
   useEffect(() => {
@@ -16,11 +16,11 @@ const ChatContainer = () => {
   console.log(messages);
 
   return (
-    <div className="h-full flex flex-col justify-between overflow-hidden">
+    <div className="flex flex-col justify-between h-full overflow-hidden ">
       <div className="hidden md:block">
         <TopChatContainer />
       </div>
-      <div>
+      <div className=" h-full">
          <p>CONTENIDO</p> 
       </div>
      
@@ -29,4 +29,4 @@ const ChatContainer = () => {
   );
 };
 
-export default ChatContainer;
+export default OpenChat;
