@@ -2,6 +2,10 @@ import { create } from "zustand";
 import { axiosInstance } from "../api/axios.ts";
 import axios from "axios";
 
+import {Socket, io} from "socket.io-client";
+
+const BASE_URL = "http://localhost:3000";
+
 // Tipos
 export type User = {
   _id: string;
@@ -31,7 +35,7 @@ interface ChangeProfilePic {
 
 
 interface LoadingState {
-  type: "checkingAuth" | "log" | "changingInfo" | "changingProfilePic" | null;
+  type: "checkingAuth" | "log" | "changingInfo" | "changingProfilePic" | "search" | null;
   isLoading: boolean;
 }
 
@@ -44,6 +48,7 @@ interface AuthStore {
   authUser: User | null;
   loading: LoadingState;
   error: ErrorState;
+  onlineUsers: string[];
   setLoading: (type: LoadingState["type"], isLoading: boolean) => void;
   setError: (type: ErrorState["type"], message: string | null) => void;
   clearError: () => void;
@@ -54,14 +59,39 @@ interface AuthStore {
   logOutRequest: () => Promise<void>;
   changeGeneralInfo: (data: ChangeGeneralInfo) => Promise<void>;
   changeProfilePic: (data: ChangeProfilePic) => Promise<void>;
+
+  searchResults: User[] | null;
+  getSearchResults: (query: string) => Promise<void>; 
+
+  connectSocket: () => void;
+  disconnectSocket: () => void;
+  socket: Socket | null;
 }
 
 
 // Implementación del store
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthStore>((set, get) => ({
   authUser: null,
   loading: { type: null, isLoading: false },
   error: { type: null, message: null },
+
+  searchResults:  null,
+  getSearchResults: async (query: string) => {
+    set({loading: {type: "search", isLoading: true}});
+    try {
+      const res = await axiosInstance.get(`/user/get-results/${query}`);
+      set({searchResults: res.data});
+    } catch (e) {
+      console.log(e);
+    } finally {
+      set({loading: {type: null, isLoading: false}});
+    }
+  },
+
+  socket: null,
+  onlineUsers: [],
+
+  
 
   setLoading: (type, isLoading) => set({ loading: { type, isLoading } }),
   setError: (type, message) => set({ error: { type, message } }),
@@ -72,6 +102,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const res = await axiosInstance.get("/auth/check");
       set({ authUser: res.data });
+      get().connectSocket();
     } catch {
       set({ authUser: null });
     } finally {
@@ -84,6 +115,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
+      get().connectSocket();
     } catch (e) {
        if(axios.isAxiosError(e) && e.response){
         set({ error: { type: "auth", message: e.response.data.message } });
@@ -100,6 +132,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data });
+      get().connectSocket();
     } catch (e) {
         if(axios.isAxiosError(e) && e.response){
           set({ error: { type: "auth", message: e.response.data.message } });
@@ -116,6 +149,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       await axiosInstance.get("/auth/logout");
       set({ authUser: null });
+      get().disconnectSocket();
     } catch {
       set({ authUser: null });
     }
@@ -145,5 +179,29 @@ export const useAuthStore = create<AuthStore>((set) => ({
       console.log(e);
     }
 
+  },
+
+  connectSocket: () => {
+    const {authUser} = get()
+    if(!authUser || get().socket?.connected) return;
+
+    const socket = io(BASE_URL, {
+      query: {
+        userId: authUser._id
+      }
+    });
+    socket.connect();
+    set({socket});
+
+    socket.on("onlineUsers", (onlineUsers: string[] ) => {
+      set({onlineUsers});
+    })
+  },
+  disconnectSocket: () => {
+    if(get().socket?.connected){
+      get().socket?.disconnect();
+    }
   }
 }));
+
+

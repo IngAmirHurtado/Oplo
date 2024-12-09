@@ -18,13 +18,14 @@ import CustomIcon from "@/components/CustomIcon";
 import { LogOut, User } from "lucide-react";
 
 const MyAccountDropdownMenu = () => {
-  const { authUser, logOutRequest } = useAuthStore();
+  const { authUser, logOutRequest, onlineUsers } = useAuthStore();
   const { previewProfilePic } = useGeneralStore();
 
   const navigate = useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
+        <div className="relative">
         <img
           src={`${
             previewProfilePic
@@ -33,6 +34,11 @@ const MyAccountDropdownMenu = () => {
           }`}
           className="w-8 h-8 rounded-full"
         />
+        { authUser && onlineUsers.includes(authUser?._id) && (
+          <div className="absolute bg-primary w-[11px] h-[11px] rounded-full bottom-0 right-0"></div>
+        )}
+        </div>
+        
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>

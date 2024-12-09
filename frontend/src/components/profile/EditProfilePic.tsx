@@ -27,10 +27,10 @@ const EditProfilePic = () => {
   }
 
   return (
-    <form className="absolute p-2 rounded-full cursor-pointer bg-muted transition hover:bg-primary dark:hover:text-black right-[-.4rem] bottom-0">
+    <form className="absolute p-2 rounded-full cursor-pointer bg-muted transition hover:scale-[1.1] right-[-.4rem] bottom-0">
       <input type="file" accept="image/*" className="hidden" id="file-upload"  onChange={onChangeImage} />
       <label htmlFor="file-upload">
-        <Edit className="w-5 h-5   " strokeWidth={1} />
+        <Edit className="w-5 h-5  cursor-pointer " strokeWidth={1} />
       </label>
   
     </form>

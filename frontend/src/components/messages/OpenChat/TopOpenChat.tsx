@@ -1,13 +1,15 @@
-
+import { useAuthStore } from '@/store/useAuthStore';
+import { useMessageStore } from '@/store/useMessageStore'
 
 import CustomIcon from '@/components/CustomIcon';
 import MobileMenu from '@/components/navBar/MobileMenu'
 import { ModeToggle } from '@/components/theme/mode-toggle';
-import { useMessageStore } from '@/store/useMessageStore'
+
 
 import { X } from 'lucide-react'
 
 const TopChatContainer = () => {
+  const { onlineUsers } = useAuthStore();
     const { userChatSelected, setChatSelected, clearMessages } = useMessageStore();
 
   return (
@@ -26,7 +28,11 @@ const TopChatContainer = () => {
             <p className="text-sm font-poppins">
               {userChatSelected && userChatSelected.username}
             </p>
-            <p>.</p>
+            {userChatSelected && onlineUsers.includes(userChatSelected._id) ? (
+              <p className="text-xs font-montserrat text-primary">En linea</p>
+            ) : (
+              <p className="text-xs font-montserrat text-gray-500">Desconectado</p>
+            )}
           </div>
         </div>
         <div className='flex gap-1'>

@@ -13,13 +13,15 @@ import PublicRoutes from "@/components/routes/PublicRoutes";
 import LogInPage from "@/pages/LogInPage";
 import SignUp from "@/pages/SignUpPage";
 
-import HomePage from "@/pages/HomePage";
 import MyProfilePage from "@/pages/MyProfilePage";
 import MessagesPage from "@/pages/Messages";
+import SearchPage from "@/pages/SearchPage";
+import HelpPage from "@/pages/HelpPage";
 
 import { Toaster } from "@/components/ui/toaster";
 
 import { Loader } from "lucide-react";
+
 
 
 function App() {
@@ -53,9 +55,11 @@ function App() {
         </Route>
 
         <Route element={<PrivateRoutes />}>
-          <Route path="/home" element={<HomePage />} />
           <Route path="/profile" element={<MyProfilePage />} />
           <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/search/:id" element={<SearchPage />} />
+          <Route path="/help" element={<HelpPage />} />
+        
         </Route>
       </Routes>
       <Toaster />

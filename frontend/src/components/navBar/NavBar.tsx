@@ -1,3 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
+import {useForm} from "react-hook-form";
+
 import { Input } from "@/components/ui/input";
 
 import { ModeToggle } from "@/components/theme/mode-toggle";
@@ -8,9 +12,19 @@ import MyAccountDropdownMenu from "@/components/navBar/MyAccountDropdownMenu";
 
 import { Search } from "lucide-react";
 
-
+interface FormValues {
+  query: string;
+}
 
 const NavBar = () => {
+
+  const { register, handleSubmit } = useForm<FormValues>();
+
+  const navigate = useNavigate();
+
+  const onSubmit = (data: FormValues) => {
+      navigate(`/search/${data.query}`);
+  }
 
 
   return (
@@ -26,13 +40,13 @@ const NavBar = () => {
             <MobileMenu />
        
           
-          <div className="relative w-10/12 md:w-9/12">
+          <form className="relative w-10/12 md:w-9/12" onSubmit={handleSubmit(onSubmit)}>
             <Search
               strokeWidth={1}
               className="w-5 h-5 absolute top-[.6rem] left-[.8rem]"
             />
-            <Input placeholder="Buscar" className="pl-12" />
-          </div>
+            <Input placeholder="Buscar" className="pl-12" {...register("query", {required:true})}/>
+          </form>
         </div>
 
         <div className="w-[100px] md:w-[450px] flex justify-end items-center gap-2 ">

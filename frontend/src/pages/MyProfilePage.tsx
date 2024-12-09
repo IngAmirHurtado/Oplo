@@ -22,7 +22,7 @@ const MyProfilePage = () => {
         <div className="min-w-[250px]  py-3 hidden md:block ">
           <SideBar />
         </div>
-        <div className="md:py-3 w-full max-h-full overflow-hidden flex-grow">
+        <div className="md:py-3 w-full max-h-full overflow-hidden ">
           {/* Este div es el que manejará el scroll */}
           <div className="bg-background h-full rounded-lg p-3 overflow-auto max-h-[calc(100vh-88px)] relative">
             <div className="">

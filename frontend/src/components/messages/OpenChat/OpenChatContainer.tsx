@@ -9,7 +9,7 @@ import  MessageSkeleton  from "./MessageSkeleton";
 
 
 const OpenChatContainer = () => {
-  const { userChatSelected, getMessages, messages,  } = useMessageStore();
+  const { userChatSelected, getMessages, messages,listenLiveMessagesInChat, unListenLiveMessagesInChat  } = useMessageStore();
   const { authUser } = useAuthStore();
 
   const scrollToBotton = useRef<HTMLDivElement | null>(null)
@@ -20,8 +20,11 @@ const OpenChatContainer = () => {
   useEffect(() => {
     if (userChatSelected) {
       getMessages(userChatSelected._id);
+      listenLiveMessagesInChat();
+
+      return () => unListenLiveMessagesInChat();
     }
-  }, [getMessages, userChatSelected]);
+  }, [getMessages, userChatSelected, listenLiveMessagesInChat, unListenLiveMessagesInChat]);
 
 
 

@@ -4,7 +4,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 const PublicRoutes = () => {
     const {authUser} = useAuthStore();
 
-    return authUser ? <Navigate to="/home" replace/> : <Outlet />;
+    return authUser ? <Navigate to="/messages" replace/> : <Outlet />;
 }
 
 export default PublicRoutes

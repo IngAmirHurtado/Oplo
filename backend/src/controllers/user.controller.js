@@ -2,6 +2,18 @@ import User from '../models/user.model.js';
 import cloudinary from '../lib/cloudinary.js';
 
 
+export const getUserResults = async (req, res ) => {
+    const { search} = req.params;
+    const userId = req.user._id;
+
+    const users = await User.find({
+        username: { $regex: search, $options: 'i' }, // Coincidencia parcial con insensibilidad
+        _id: { $ne: userId }, // Exclusión de un usuario específico
+      }).select('username email _id profilePic createdAt updatedAt following followers');
+
+    res.status(200).json(users);
+}
+
 export const randomSuggestion = async (req, res) => {
     const user = req.user;
 
@@ -37,7 +49,6 @@ export const updateProfilePic = async (req, res) => {
     if(!profilePic) return res.status(400).json({ message: 'La imagen es requerida' });
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
-    await cloudinary.uploader.destroy(user.profilePic);
     const updateUser = await User.findByIdAndUpdate(user._id, {profilePic: uploadResponse.secure_url}, {new: true});
 
     res.status(200).json(updateUser);

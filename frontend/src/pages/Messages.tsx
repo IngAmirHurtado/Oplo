@@ -27,7 +27,7 @@ const MessagesPage = () => {
         <div className="min-w-[250px]  py-3 hidden md:block ">
           <SideBar />
         </div>
-        <div className="md:py-3 w-full max-h-full overflow-hidden flex-grow">
+        <div className="md:py-3 w-full max-h-full overflow-hidden">
          
           <div className="h-full p-3 bg-background rounded-lg  md:max-h-[calc(100vh-88px)] ">
             

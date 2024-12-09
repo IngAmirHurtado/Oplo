@@ -27,7 +27,7 @@ const ChatsContainer = () => {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
               {usersWithChat &&
                 usersWithChat.map((user, i) => 
                 <div key={i}>
