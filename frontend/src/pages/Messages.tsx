@@ -29,7 +29,7 @@ const MessagesPage = () => {
         </div>
         <div className="md:py-3 w-full max-h-full overflow-hidden flex-grow">
          
-          <div className="h-full p-3 bg-background rounded-lg md:max-h-[calc(100vh-88px)] ">
+          <div className="h-full p-3 bg-background rounded-lg  md:max-h-[calc(100vh-88px)] ">
             
                  {userChatSelected ? <OpenChatContainer />  : (
                   <ChatsContainer />

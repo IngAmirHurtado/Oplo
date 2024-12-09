@@ -29,9 +29,7 @@ const MyAccountDropdownMenu = () => {
           src={`${
             previewProfilePic
               ? previewProfilePic
-              : authUser?.profilePic === ""
-              ? "/imgs/default-user.svg"
-              : authUser?.profilePic
+              : authUser?.profilePic || "/imgs/default-user.svg"
           }`}
           className="w-8 h-8 rounded-full"
         />

@@ -8,10 +8,10 @@ import { useMessageStore } from '@/store/useMessageStore'
 import { X } from 'lucide-react'
 
 const TopChatContainer = () => {
-    const { userChatSelected, setChatSelected } = useMessageStore();
+    const { userChatSelected, setChatSelected, clearMessages } = useMessageStore();
 
   return (
-    <div className="flex justify-between items-center p-3 bg-muted rounded-lg w-full border-b" >
+    <div className="flex justify-between items-center p-3 bg-muted rounded-lg w-full border-b fixed md:relative" >
         <div className="flex items-center w-full gap-3">
         <MobileMenu />
           <img
@@ -34,7 +34,7 @@ const TopChatContainer = () => {
                 <ModeToggle />
             </div>
             
-            <div  onClick={() => setChatSelected(null)}>
+            <div  onClick={() => {setChatSelected(null); clearMessages()  }}>
           <CustomIcon icon={X} variant='destructive' />
         </div> 
         </div>

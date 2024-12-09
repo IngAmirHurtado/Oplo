@@ -26,7 +26,7 @@ const UserCardInfo = (props: UserCardInfoProps) => {
       <div className="flex flex-col gap-7 items-center">
         <div className="relative">
           <img
-            src={`${previewProfilePic ? previewProfilePic : (user?.profilePic === "" ? "/imgs/default-user.svg"  : user?.profilePic )}` }
+            src={`${previewProfilePic ? previewProfilePic : (user?.profilePic || "/imgs/default-user.svg"  )}` }
             className="h-24 w-24 rounded-full"
           />
 

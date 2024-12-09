@@ -42,6 +42,7 @@ interface MessageStore {
     getMessages: (userId : string) => Promise<void>;
 
     sendMessage: (data: FormData) => Promise<void>;
+    clearMessages: () => void;
 }
 
 
@@ -52,6 +53,7 @@ export const useMessageStore = create<MessageStore>((set) => ({
     userChatSugesstions: [],
     userChatSelected: null,
     messages: [],
+    
 
     setChatSelected: (user) => {
         set({userChatSelected: user})
@@ -100,6 +102,10 @@ export const useMessageStore = create<MessageStore>((set) => ({
         }catch{
             console.log('error al enviar mensaje')
         }
+    },
+
+    clearMessages: () => {
+        set({messages: []})
     }
 
 }))
