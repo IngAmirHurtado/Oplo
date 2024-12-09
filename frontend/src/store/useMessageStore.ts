@@ -38,7 +38,7 @@ interface MessageStore {
     userChatSelected : User | null;
     setChatSelected: (user : User | null) => void;
     
-    messages: Messages[];
+    messages: Messages[] | null;
     getMessages: (userId : string) => Promise<void>;
 
     sendMessage: (data: FormData) => Promise<void>;
@@ -52,7 +52,7 @@ export const useMessageStore = create<MessageStore>((set) => ({
     usersWithChat: [],
     userChatSugesstions: [],
     userChatSelected: null,
-    messages: [],
+    messages: null,
     
 
     setChatSelected: (user) => {
@@ -105,7 +105,7 @@ export const useMessageStore = create<MessageStore>((set) => ({
     },
 
     clearMessages: () => {
-        set({messages: []})
+        set({messages: null})
     }
 
 }))

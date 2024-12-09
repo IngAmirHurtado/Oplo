@@ -5,6 +5,7 @@ import { useMessageStore } from "@/store/useMessageStore";
 import TopChatContainer from "@/components/messages/OpenChat/TopOpenChat";
 import SendMessageContainer from "@/components/messages/OpenChat/SendMessageContainer";
 import MessageItem from "./MessageItem";
+import  MessageSkeleton  from "./MessageSkeleton";
 
 
 const OpenChatContainer = () => {
@@ -22,13 +23,15 @@ const OpenChatContainer = () => {
     }
   }, [getMessages, userChatSelected]);
 
+
+
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="hidden md:block">
         <TopChatContainer />
       </div>
       <div className="p-1 pb-5 w-full flex flex-col overflow-y-auto gap-4  h-full ">
-        {messages &&
+  {messages ?
           messages.map((message) =>
             authUser && message.senderId === authUser._id ? ( 
               <MessageItem
@@ -48,7 +51,7 @@ const OpenChatContainer = () => {
               />
               
             )
-          )}
+          )      : <MessageSkeleton />    }
         <div ref={scrollToBotton} />
         
       </div>

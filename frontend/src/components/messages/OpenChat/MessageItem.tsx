@@ -8,6 +8,7 @@ interface MessageItemProps {
 }
 
 const MessageItem = (props: MessageItemProps) => {
+  
   const { site, createdAt, image, text } = props;
   return (
     <div
