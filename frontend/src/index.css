@@ -95,7 +95,25 @@ body {
     --chart-2: 200 50% 45%; /* Azul oscuro */
     --chart-3: 340 65% 55%; /* Morado llamativo */
   }
+
+    /* Personaliza la barra de scroll global */
+    ::-webkit-scrollbar {
+      width: 8px; /* Ancho */
+      height: 8px; /* Altura para barras horizontales */
+    }
   
+    ::-webkit-scrollbar-thumb {
+      background: var(--muted-foreground); 
+      border-radius: 4px; /* Redondeo */
+    }
+  
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--muted); /* Color al pasar el mouse */
+    }
+  
+    ::-webkit-scrollbar-track {
+      background: var(--background); /* Color del fondo */
+    }
   
 }
 

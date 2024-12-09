@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { useAuthStore } from "./store/useAuthStore";
+import { useMessageStore } from "./store/useMessageStore";
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
@@ -23,10 +24,13 @@ import { Loader } from "lucide-react";
 
 function App() {
   const { checkAuth, loading } = useAuthStore();
+  const { setChatSelected, clearMessages } = useMessageStore();
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+    setChatSelected(null)
+    clearMessages()
+  }, [checkAuth, setChatSelected, clearMessages]);
 
   if (loading.type === "checkingAuth" && loading.isLoading) {
     return (

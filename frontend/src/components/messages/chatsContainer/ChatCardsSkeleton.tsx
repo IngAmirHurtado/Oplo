@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
  
-const SkeletonChatCards = () => {
+const ChatCardsSkeleton = () => {
   return (
     <div className="flex items-center space-x-4">
       <Skeleton className="h-10 w-10 rounded-full" />
@@ -12,4 +12,4 @@ const SkeletonChatCards = () => {
   )
 }
 
-export default SkeletonChatCards
+export default ChatCardsSkeleton

@@ -4,7 +4,7 @@ import { useMessageStore } from "@/store/useMessageStore";
 
 import ChatCard from "@/components/messages/chatsContainer/ChatCard";
 
-import SkeletonChatCards from "./SkeletonChatCards";
+import ChatCardsSkeleton from "./ChatCardsSkeleton";
 
 
 
@@ -18,13 +18,12 @@ const ChatsContainer = () => {
 
   return (
     <div className="flex h-full flex-col justify-between p-3  overflow-auto">
-
         <div className="flex flex-col gap-3 font-poppins mt-2 w-full">
           <p className="text-xs mb-2">Chats recientes</p>
           {loading.type === "isLoadingUsersWithChat" && loading.isLoading ? (
             <div className="flex flex-col gap-4">
               {Array.from({ length: 2 }, (_, i) => (
-                <SkeletonChatCards key={i} />
+                <ChatCardsSkeleton key={i} />
               ))}
             </div>
           ) : (

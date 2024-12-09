@@ -60,7 +60,7 @@ const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
   return (
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsContent value="account">
-        <Card>
+        <Card className="p-3 md:p-0">
           <CardHeader>
             <CardTitle className="font-poppins">Cuenta</CardTitle>
             <CardDescription className="font-montserrat">
@@ -70,7 +70,7 @@ const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="username" className="font-poppins">
+                <Label htmlFor="username" className="font-poppins   text-xs">
                   Username
                 </Label>
                 <Input
@@ -81,7 +81,7 @@ const ChangeInfoAccount = (props: ChangeInfoAccountProps) => {
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="email" className="font-poppins">
+                <Label htmlFor="email" className="font-poppins text-xs">
                   Email
                 </Label>
                 <Input
