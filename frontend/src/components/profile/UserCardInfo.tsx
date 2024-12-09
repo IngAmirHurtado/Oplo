@@ -58,13 +58,13 @@ const UserCardInfo = (props: UserCardInfoProps) => {
           <div className="w-8 h-8 grid place-items-center bg-primary/10 rounded-lg">
             <p className="text-muted-foreground "> {user?.followers?.length}</p>
           </div>
-          <p className="text-xs text-slate-500">Followers</p>
+          <p className="text-xs text-slate-500">Seguidores</p>
         </div>
         <div className="flex flex-col gap-1  items-center">
           <div className="w-8 h-8 grid place-items-center bg-primary/10 rounded-lg">
             <p className="text-muted-foreground"> {user?.following?.length}</p>
           </div>
-          <p className="text-xs text-slate-500">Following</p>
+          <p className="text-xs text-slate-500">Siguiendo</p>
         </div>
       </div>
     </div>

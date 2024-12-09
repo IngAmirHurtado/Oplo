@@ -48,8 +48,8 @@ const HelpPage = () => {
                   ¿Qué fines tenemos?
                 </AccordionTrigger>
                 <AccordionContent className="font-montserrat text-gray-500">
-                  Oplo ofrece una alterntiva para comunicarte con tus amigos y
-                  familiares de manera segura y privada, donde podrás ver si
+                  Oplo ofrece una alternativa para comunicarte con tus amigos y
+                  familiares de manera segura y privada, con mensajes e imagenes, además podrás ver si
                   estan <span className="text-primary"> online</span>
                 </AccordionContent>
               </AccordionItem>
